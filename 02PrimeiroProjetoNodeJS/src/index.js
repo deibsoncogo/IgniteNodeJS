@@ -29,11 +29,15 @@ app.post("/account", (request, response) => { // cria uma conta
   return response.status(201).json(customer); // retorna algo ao usuário
 });
 
-app.get("/statement/:cpf", (request, response) => { // consulta o estrado de uma conta
-  const { cpf } = request.params; // recebe as informações passada pelo endereço (http://localhost:3333/statement/11)
+app.get("/statement", (request, response) => { // consulta o estrado de uma conta
+  const { cpf } = request.headers; // recebe as informações passada pelo cabeçalho
 
   // busca uma conta com este cpf
   const customerFind = customers.find((customer) => customer.cpf === cpf);
+
+  if (!customerFind) { // vai barrar a lista se não existir uma conta com este CPF
+    return response.status(400).json({ error: "Não existe uma conta com este CPF" });
+  }
 
   return response.json(customerFind.statement); // retorna algo ao usuário
 });
