@@ -1,11 +1,14 @@
 {
   "name": "01fundamentosnodejs",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "license": "MIT",
   "description": "Fundamentos do Node JS aprendido no Ignite da Rocketseat",
   "repository": "https://github.com/deibsoncogo/IgniteNodeJS",
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
+  "scripts": {
+    "dev": "nodemon"
+  },
   "dependencies": {
     "express": "^4.17.1"
   },
@@ -14,6 +17,7 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-import-helpers": "^1.1.0"
+    "eslint-plugin-import-helpers": "^1.1.0",
+    "nodemon": "^2.0.12"
   }
 }
