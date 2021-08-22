@@ -22,6 +22,18 @@ function VerifyExistAccountCpf(request, response, next) { // middleware para ver
   return next(); // faz o middleware seguir seu caminho
 }
 
+function GetBalance(statement) { // vai verificar o saldo da conta
+  const balance = statement.reduce((acc, operation) => {
+    if (operation.type === "credit") { // verifica o tipo de movimentação
+      return acc + operation.amount;
+    }
+
+    return acc - operation.amount;
+  }, 0);
+
+  return balance; // retorna algo para quem chamou a função
+}
+
 app.post("/account", (request, response) => { // cria uma conta
   const { cpf, name } = request.body; // recebe as informações passada pela requisição
 
@@ -65,6 +77,29 @@ app.post("/deposit", VerifyExistAccountCpf, (request, response) => { // cria um 
   customerFind.statement.push(deposit); // salva os dados
 
   return response.status(201).json(deposit); // retorna algo ao usuário
+});
+
+app.post("/withdraw", VerifyExistAccountCpf, (request, response) => {
+  const { description, amount } = request.body; // recebe as informações passada pela requisição
+  const { customerFind } = request; // recebe as informações dentro do request
+
+  const balance = GetBalance(customerFind.statement); // chama a função que vai verificar o saldo
+
+  if (balance < amount) { // barra se o saldo for menor que o valor do saque
+    return response.status(400).json({ error: "Saldo insuficiente" });
+  }
+
+  const withdraw = { // prepara os sados a salvar
+    id: uuidV4(),
+    description,
+    amount,
+    type: "debit",
+    createdAt: new Date(),
+  };
+
+  customerFind.statement.push(withdraw); // salva os dados
+
+  return response.status(400).json(withdraw); // retorna algo ao usuário
 });
 
 // define a porta de execução do servidor
