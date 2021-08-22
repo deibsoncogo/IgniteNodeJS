@@ -5,3 +5,6 @@ Um curso sobre o `backend` que será ensinado pela **Daniele Evangelista** utili
 >Aqui irei realizar anotações resumidas e objetivas de todo o curso
 
 [Anotações detalhada do curso](https://deibsoncogo.notion.site/Curso-Ignite-Node-JS-Backend-1791383ce52b4dd0aaaf96f7be19d23e)
+
+## Aplicações
+**Fundamentos do NodeJS:** Aqui foi colocado em prática os conceitos básico do Node JS utilizando algumas dependências, os métodos HTTP, os parametros e alguns comandos
