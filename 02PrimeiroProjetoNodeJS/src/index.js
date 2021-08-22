@@ -10,6 +10,13 @@ const customers = []; // cria um banco de dados volátil
 app.post("/account", (request, response) => { // cria uma conta
   const { cpf, name } = request.body; // recebe as informações passada pela requisição
 
+  // verificar se o cpf já está cadastrado no banco de dados
+  const cpfAlreadyExists = customers.some((customer) => customer.cpf === cpf);
+
+  if (cpfAlreadyExists) { // barra o cadastro de uma conta com um cpf já salvo
+    return response.status(400).json({ error: "Já existe uma conta com este CPF" });
+  }
+
   const customer = { // prepara os sados a salvar
     id: uuidV4(),
     cpf,
