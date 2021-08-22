@@ -7,6 +7,21 @@ app.use(express.json()); // configura o tipo de dados a ser trabalhado
 
 const customers = []; // cria um banco de dados volátil
 
+function VerifyExistAccountCpf(request, response, next) { // middleware para verificar se a conta existe
+  const { cpf } = request.headers; // recebe as informações passada pelo cabeçalho
+
+  // busca uma conta com este cpf
+  const customerFind = customers.find((customer) => customer.cpf === cpf);
+
+  if (!customerFind) { // vai barrar se não existir uma conta com este CPF
+    return response.status(400).json({ error: "Não existe uma conta com este CPF" });
+  }
+
+  request.customerFind = customerFind; // salva as informações da conta dentro do request
+
+  return next(); // faz o middleware seguir seu caminho
+}
+
 app.post("/account", (request, response) => { // cria uma conta
   const { cpf, name } = request.body; // recebe as informações passada pela requisição
 
@@ -29,15 +44,8 @@ app.post("/account", (request, response) => { // cria uma conta
   return response.status(201).json(customer); // retorna algo ao usuário
 });
 
-app.get("/statement", (request, response) => { // consulta o estrado de uma conta
-  const { cpf } = request.headers; // recebe as informações passada pelo cabeçalho
-
-  // busca uma conta com este cpf
-  const customerFind = customers.find((customer) => customer.cpf === cpf);
-
-  if (!customerFind) { // vai barrar a lista se não existir uma conta com este CPF
-    return response.status(400).json({ error: "Não existe uma conta com este CPF" });
-  }
+app.get("/statement", VerifyExistAccountCpf, (request, response) => { // consulta o estrado de uma conta
+  const { customerFind } = request; // recebe as informações dentro do request
 
   return response.json(customerFind.statement); // retorna algo ao usuário
 });
