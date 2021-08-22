@@ -50,5 +50,22 @@ app.get("/statement", VerifyExistAccountCpf, (request, response) => { // consult
   return response.json(customerFind.statement); // retorna algo ao usuário
 });
 
+app.post("/deposit", VerifyExistAccountCpf, (request, response) => { // cria um deposito
+  const { description, amount } = request.body; // recebe as informações passada pela requisição
+  const { customerFind } = request; // recebe as informações dentro do request
+
+  const deposit = { // prepara os sados a salvar
+    id: uuidV4(),
+    description,
+    amount,
+    type: "credit",
+    createdAt: new Date(),
+  };
+
+  customerFind.statement.push(deposit); // salva os dados
+
+  return response.status(201).json(deposit); // retorna algo ao usuário
+});
+
 // define a porta de execução do servidor
 app.listen(3333, () => console.log("Server running on port 3333!"));
