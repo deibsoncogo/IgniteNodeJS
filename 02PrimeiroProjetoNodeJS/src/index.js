@@ -132,5 +132,21 @@ app.get("/account", VerifyExistAccountCpf, (request, response) => {
   return response.status(200).json(customerFind); // retorna algo ao usuário
 });
 
+app.delete("/account", VerifyExistAccountCpf, (request, response) => {
+  const { customerFind } = request; // recebe as informações dentro do request
+
+  customers.splice(customerFind, 1); // remove o item do array
+
+  return response.status(204).json(customers); // retorna algo ao usuário
+});
+
+app.get("/balance", VerifyExistAccountCpf, (request, response) => {
+  const { customerFind } = request; // recebe as informações dentro do request
+
+  const balance = GetBalance(customerFind.statement); // chama a função que vai verificar o saldo
+
+  return response.status(200).json(balance); // retornar algo ao usuário
+});
+
 // define a porta de execução do servidor
 app.listen(3333, () => console.log("Server running on port 3333!"));
