@@ -102,5 +102,19 @@ app.post("/withdraw", VerifyExistAccountCpf, (request, response) => {
   return response.status(400).json(withdraw); // retorna algo ao usuário
 });
 
+app.get("/statement/date", VerifyExistAccountCpf, (request, response) => { // consulta o estrado de uma conta
+  const { date } = request.query; // recebe as informações no endereço (http://localhost:3000/user?page=2&order=desc)
+  const { customerFind } = request; // recebe as informações dentro do request
+
+  const dateFormat = new Date(`${date} 00:00`); // realizar uma formatação na data
+
+  // extrai as movimentações com a data informada
+  const statementFilter = customerFind.statement.filter((statement) => {
+    return statement.createdAt.toDateString() === new Date(dateFormat).toDateString();
+  });
+
+  return response.json(statementFilter); // retorna algo ao usuário
+});
+
 // define a porta de execução do servidor
 app.listen(3333, () => console.log("Server running on port 3333!"));
