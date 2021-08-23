@@ -116,5 +116,21 @@ app.get("/statement/date", VerifyExistAccountCpf, (request, response) => { // co
   return response.json(statementFilter); // retorna algo ao usuário
 });
 
+app.put("/account", VerifyExistAccountCpf, (request, response) => {
+  const { name } = request.body; // recebe as informações passada pela requisição
+  const { customerFind } = request; // recebe as informações dentro do request
+
+  customerFind.name = name; // salva o novo nome
+
+  // retorna algo ao usuário
+  return response.status(201).json({ message: `Nome alterado para ${name}` });
+});
+
+app.get("/account", VerifyExistAccountCpf, (request, response) => {
+  const { customerFind } = request; // recebe as informações dentro do request
+
+  return response.status(200).json(customerFind); // retorna algo ao usuário
+});
+
 // define a porta de execução do servidor
 app.listen(3333, () => console.log("Server running on port 3333!"));
