@@ -57,7 +57,7 @@ app.post("/account", (request, response) => { // criar conta
   const customerAlreadyExists = customers.some((customer) => customer.cpf === cpf);
 
   if (customerAlreadyExists) { // impede o cadastro de conta com CPF já cadastrado
-    return response.status(406).json({ error: "Já existe uma conta com este CPF!" });
+    return response.status(400).json({ error: "Já existe uma conta com este CPF!" });
   }
 
   const account = { // prepara os dados a salvar
@@ -79,7 +79,7 @@ app.delete("/account", VerifyIfExistsAccountCpf, (request, response) => { // exc
   const { balance } = customerFind.statement ? GetBalance(customerFind.statement) : 0;
 
   if (balance !== 0) { // impede que a conta seja excluída se tiver saldo diferente de zero
-    return response.status(406).json({ error: "O saldo da conta é diferente de zero!" });
+    return response.status(400).json({ error: "O saldo da conta é diferente de zero!" });
   }
 
   customers.splice(customerFind, 1); // remove o item selecionado
@@ -112,7 +112,7 @@ app.post("/deposit", VerifyIfExistsAccountCpf, (request, response) => { // criar
   const { customerFind } = request; // recebe as informações dentro do request
 
   if (amount <= 0) { // impede uma movimentação com o valor menor ou igual a zero
-    return response.status(406).json({ error: "O valor tem que ser maior que zero!" });
+    return response.status(400).json({ error: "O valor tem que ser maior que zero!" });
   }
 
   const statementOperation = { // prepara os dados a salvar
@@ -132,7 +132,7 @@ app.post("/withdraw", VerifyIfExistsAccountCpf, (request, response) => { // cria
   const { customerFind } = request; // recebe as informações dentro do request
 
   if (amount <= 0) { // impede uma movimentação com o valor menor ou igual a zero
-    return response.status(406).json({ error: "O valor tem que ser maior que zero!" });
+    return response.status(400).json({ error: "O valor tem que ser maior que zero!" });
   }
 
   const { balance } = GetBalance(customerFind.statement); // chama a função que traz o saldo
@@ -159,14 +159,14 @@ app.post("/transfer", VerifyIfExistsAccountCpf, (request, response) => { // cria
   const { customerFind } = request; // recebe as informações dentro do request
 
   if (amount <= 0) { // impede uma movimentação com o valor menor ou igual a zero
-    return response.status(406).json({ error: "O valor tem que ser maior que zero!" });
+    return response.status(400).json({ error: "O valor tem que ser maior que zero!" });
   }
 
   // recebe os dados da conta a enviar o dinheiro
   const accountRecipient = customers.find((customer) => customer.cpf === cpfRecipient);
 
   if (!accountRecipient) { // identifica se a conta é válida
-    return response.status(406).json({ error: "Conta destinatária não exite!" });
+    return response.status(400).json({ error: "Conta destinatária não exite!" });
   }
 
   const { balance } = GetBalance(customerFind.statement); // chama a função que traz o saldo
@@ -204,7 +204,7 @@ app.get("/balance", VerifyIfExistsAccountCpf, (request, response) => { // gerar 
   } = GetBalance(customerFind.statement); // chama a função que calcula o saldo
 
   // retorno ao usuário
-  return response.json({ balance, credit, debit, transferSender, transferRecipient });
+  return response.status(200).json({ balance, credit, debit, transferSender, transferRecipient });
 });
 
 app.get("/statement", VerifyIfExistsAccountCpf, (request, response) => { // listar movimentações
