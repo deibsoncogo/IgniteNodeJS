@@ -9,15 +9,15 @@ app.post("/course", (request, response) => { // método para criar algo
   const { name } = request.body;
 
   // retorna algo ao usuário
-  return response.json(["Curso 1", "Curso 2", "Curso 3", "Curso 4", name]);
+  return response.status(201).json([["Curso 4", "Curso 2", "Curso 1", "Curso 3"], [name]]);
 });
 
 app.get("/course", (request, response) => { // método para realizar consulta
-  // recebe a informação pelo link do endereço (http://localhost:3000/user?page=2&order=desc)
+  // recebe a informação pelo link do endereço (http://localhost:3000/user?page=1&order=desc)
   const { page, order } = request.query;
 
   // retorna algo ao usuário
-  return response.json(["Curso 1", "Curso 2", "Curso 3", page, order]);
+  return response.status(200).json([["Curso 1", "Curso 2", "Curso 3", "Curso 4"], [page, order]]);
 });
 
 app.put("/course/:id", (request, response) => { // método para alterar várias coisas
@@ -25,7 +25,7 @@ app.put("/course/:id", (request, response) => { // método para alterar várias 
   const { id } = request.params;
 
   // retorna algo ao usuário
-  return response.json(["Curso 5", "Curso 6", "Curso 3", "Curso 4", id]);
+  return response.status(201).json([["Curso 5", "Curso 6", "Curso 3", "Curso 4"], [id]]);
 });
 
 app.patch("/course/:id", (request, response) => { // método para alterar uma coisa
@@ -33,7 +33,7 @@ app.patch("/course/:id", (request, response) => { // método para alterar uma co
   const { id } = request.params;
 
   // retorna algo ao usuário
-  return response.json(["Curso 5", "Curso 6", "Curso 7", "Curso 4", id]);
+  return response.status(201).json([["Curso 5", "Curso 6", "Curso 7", "Curso 4"], [id]]);
 });
 
 app.delete("/course/:id", (request, response) => { // método para deletar algo
@@ -41,7 +41,7 @@ app.delete("/course/:id", (request, response) => { // método para deletar algo
   const { id } = request.params;
 
   // retorna algo ao usuário
-  return response.json(["Curso 5", "Curso 6", "Curso 7", id]);
+  return response.status(201).json([["Curso 5", "Curso 6", "Curso 7"], [id]]);
 });
 
 // define a porta de execução do servidor
