@@ -8,5 +8,10 @@ export default function CreateCourse(request: Request, response: Response) {
     duration: 10,
   });
 
+  createCourseService.execute({ // executa mais uma vez o método
+    name: "React JS",
+    educator: "Diego",
+  });
+
   return response.send(); // retornar algo para o chamado
 }
