@@ -7,7 +7,7 @@
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --respawn --ignore-watch node_modules src/server.ts"
+    "dev": "ts-node-dev --inspect --transpile-only --respawn --ignore-watch node_modules src/server.ts"
   },
   "dependencies": {
     "express": "^4.17.1"
