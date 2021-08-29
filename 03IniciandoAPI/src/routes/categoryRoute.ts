@@ -12,4 +12,10 @@ categoryRoute.post("/", (request, response) => { // cria uma categoria
   return response.status(201).json(category); // retornar algo ao chamado
 });
 
+categoryRoute.get("/", (request, response) => { // lista as categorias
+  const all = categoryRepository.list(); // chama a função
+
+  return response.status(200).json(all); // retornar algo ao chamador
+});
+
 export { categoryRoute }; // exporta todo o conteúdo para poder ser utilizado em outro arquivo

@@ -28,6 +28,10 @@ class CategoryRepository {
 
     return category; // retorna ao chamador
   }
+
+  list(): CategoryModel[] { // função que vai listar todas categorias cadastrada
+    return this.categories; // retorna algo ao chamador
+  }
 }
 
 export { CategoryRepository }; // exporta para poder ser utilizado por outro arquivo
