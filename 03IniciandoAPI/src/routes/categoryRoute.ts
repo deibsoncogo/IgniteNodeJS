@@ -1,14 +1,22 @@
 import { Router } from "express"; // importa a dependência sobre rota
-import { v4 as uuidV4 } from "uuid";
+import { CategoryModel } from "../model/categoryModel";
 
 const categoryRoute = Router(); // método que ajuda na programação
 
-const categories = []; // banco de dados volátil
+const categories: CategoryModel[] = []; // banco de dados volátil com tipagem
 
 categoryRoute.post("/", (request, response) => { // cria uma categoria
   const { name, description } = request.body; // recebe os dados dentro da requisição
 
-  const category = { id: uuidV4(), name, description }; // prepara os dados antes de salvar
+  // instancia para conseguimos utilizar o constructor dentro do arquivo chamado
+  const category = new CategoryModel();
+
+  // Object server para vincular dados a um objeto com facilidade
+  Object.assign(category, { // prepara os dados antes de salvar
+    name,
+    description,
+    createdAt: new Date(),
+  });
 
   categories.push(category); // salva os dados dentro do banco de dados
 
