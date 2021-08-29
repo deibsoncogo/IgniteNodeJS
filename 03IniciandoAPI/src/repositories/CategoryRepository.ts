@@ -32,6 +32,12 @@ class CategoryRepository {
   list(): CategoryModel[] { // função que vai listar todas categorias cadastrada
     return this.categories; // retorna algo ao chamador
   }
+
+  findByName(name: string): CategoryModel { // função que vai buscar uma categoria com este nome
+    const category = this.categories.find((f) => f.name === name); // realiza a busca
+
+    return category; // retorna algo ao chamador
+  }
 }
 
 export { CategoryRepository }; // exporta para poder ser utilizado por outro arquivo
