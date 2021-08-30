@@ -1,5 +1,6 @@
 import { Router } from "express"; // importa a dependência sobre rota
 import { CategoryRepository } from "../repositories/CategoryRepository"; // importa o arquivo criado
+import { CreateCategoryService } from "../services/createCategoryService"; // importa o arquivo criado
 
 const categoryRoute = Router(); // método que ajuda na programação
 const categoryRepository = new CategoryRepository(); // instancia para poder utilizar o arquivo
@@ -7,13 +8,10 @@ const categoryRepository = new CategoryRepository(); // instancia para poder uti
 categoryRoute.post("/", (request, response) => { // cria uma categoria
   const { name, description } = request.body; // recebe os dados dentro da requisição
 
-  const categoryAlreadyExists = categoryRepository.findByName(name); // chama a função
+  // instancia para poder utilizar todos recursos criando um vinculo com o repositório
+  const createCategoryService = new CreateCategoryService(categoryRepository);
 
-  if (categoryAlreadyExists) { // evita a duplicação do nome de categoria
-    return response.status(400).json({ error: "Já existe uma categoria com este nome" });
-  }
-
-  const category = categoryRepository.create({ name, description }); // chama a função
+  const category = createCategoryService.execute({ name, description }); // chama a função
 
   return response.status(201).json(category); // retornar algo ao chamado
 });
