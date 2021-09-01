@@ -1,6 +1,6 @@
 import { Router } from "express"; // importa a dependência sobre rota
-import { CategoryRepository } from "../repositories/categoryRepository"; // importa o arquivo criado
-import { CreateCategoryService } from "../services/createCategoryService"; // importa o arquivo criado
+import { CategoryRepository } from "../modules/cars/repositories/categoryRepository"; // importa o arquivo criado
+import { CreateCategoryService } from "../modules/cars/services/createCategoryService"; // importa o arquivo criado
 
 const categoryRoute = Router(); // método que ajuda na programação
 const categoryRepository = new CategoryRepository(); // instancia para poder utilizar o arquivo
