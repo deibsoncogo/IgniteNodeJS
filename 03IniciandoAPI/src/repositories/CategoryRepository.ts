@@ -1,11 +1,7 @@
 import { CategoryModel } from "../model/categoryModel";
+import { ICategoryRepository, ICreateRepositoryDTO } from "./iCategoryRepository";
 
-interface ICreateRepositoryDTO { // tipagem a parte para não vincular a rota com o BD
-  name: string;
-  description: string;
-}
-
-class CategoryRepository {
+class CategoryRepository implements ICategoryRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso
   private categories: CategoryModel[]; // banco de dados volátil com tipagem
 
