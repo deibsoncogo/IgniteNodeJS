@@ -3,10 +3,21 @@ import { ICategoryRepository, ICreateRepositoryDTO } from "./iCategoryRepository
 
 class CategoryRepository implements ICategoryRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso
-  private categories: CategoryModel[]; // banco de dados volátil com tipagem
+  private categories: CategoryModel[]; // variável que vai ser um banco de dados volátil com tipagem
 
-  constructor() { // para criar algo
-    this.categories = []; // cria o banco de dados
+  private static INSTANCE: CategoryRepository; // cria uma variável privada estática tipada
+
+  // adicionamos private para bloquear acesso externo
+  private constructor() { // serve para criar algo a partir do instanciamento (Comando new)
+    this.categories = []; // cria o banco de dados volátil com tipagem
+  }
+
+  public static getInstance(): CategoryRepository { // método que vai criar o BD volátil com tipagem
+    if (!CategoryRepository.INSTANCE) { // identifica se já foi instanciado
+      CategoryRepository.INSTANCE = new CategoryRepository(); // cria o instanciamento
+    }
+
+    return CategoryRepository.INSTANCE; // retornar o banco de dados volátil com tipagem
   }
 
   create({ name, description }: ICreateRepositoryDTO): CategoryModel { // função que vai criar uma categoria
