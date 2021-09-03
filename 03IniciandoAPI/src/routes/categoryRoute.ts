@@ -1,19 +1,12 @@
 import { Router } from "express"; // importa a dependência sobre rota
 import { CategoryRepository } from "../modules/cars/repositories/categoryRepository"; // importa o arquivo criado
-import { CreateCategoryService } from "../modules/cars/services/createCategoryService"; // importa o arquivo criado
+import { createCategoryController } from "../modules/cars/useCases/createCategory";
 
 const categoryRoute = Router(); // método que ajuda na programação
 const categoryRepository = new CategoryRepository(); // instancia para poder utilizar o arquivo
 
 categoryRoute.post("/", (request, response) => { // cria uma categoria
-  const { name, description } = request.body; // recebe os dados dentro da requisição
-
-  // instancia para poder utilizar todos recursos criando um vinculo com o repositório
-  const createCategoryService = new CreateCategoryService(categoryRepository);
-
-  const category = createCategoryService.execute({ name, description }); // chama a função
-
-  return response.status(201).json(category); // retornar algo ao chamado
+  return createCategoryController.execute(request, response); // chama o controlador responsável
 });
 
 categoryRoute.get("/", (request, response) => { // lista as categorias

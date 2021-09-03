@@ -1,5 +1,5 @@
-import { CategoryModel } from "../model/categoryModel"; // importação do model de categoria
-import { ICategoryRepository } from "../repositories/iCategoryRepository"; // importação do repositório de categoria
+import { CategoryModel } from "../../model/categoryModel"; // importação do model de categoria
+import { ICategoryRepository } from "../../repositories/iCategoryRepository"; // importação do repositório de categoria
 
 interface IRequest { // tipagem dos itens a receber pelo request
   name: string;
