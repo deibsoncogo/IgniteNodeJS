@@ -1,5 +1,5 @@
 import { Router } from "express"; // importa a dependência sobre rota
-import { SpecificationRepository } from "../modules/cars/repositories/specificationRepository"; // importa o arquivo criado
+import { SpecificationRepository } from "../modules/cars/repositories/implementations/specificationRepository"; // importa o arquivo criado
 import { CreateSpecificationsService } from "../modules/cars/services/createSpecificationsService"; // importa o arquivo criado
 
 const specificationRoute = Router(); // método que ajuda na programação
