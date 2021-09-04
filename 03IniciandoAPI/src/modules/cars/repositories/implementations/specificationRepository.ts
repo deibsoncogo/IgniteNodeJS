@@ -1,5 +1,5 @@
-import { SpecificationModel } from "../model/specification";
-import { ISpecificationRepository, ISpecificationRepositoryDTO } from "./iSpecificationRepository";
+import { SpecificationModel } from "../../model/specification";
+import { ISpecificationRepository, ISpecificationRepositoryDTO } from "../iSpecificationRepository";
 
 class SpecificationRepository implements ISpecificationRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso

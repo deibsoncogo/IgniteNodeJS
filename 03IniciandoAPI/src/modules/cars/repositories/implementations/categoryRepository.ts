@@ -1,5 +1,5 @@
-import { CategoryModel } from "../model/categoryModel";
-import { ICategoryRepository, ICreateRepositoryDTO } from "./iCategoryRepository";
+import { CategoryModel } from "../../model/categoryModel";
+import { ICategoryRepository, ICreateRepositoryDTO } from "../iCategoryRepository";
 
 class CategoryRepository implements ICategoryRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso

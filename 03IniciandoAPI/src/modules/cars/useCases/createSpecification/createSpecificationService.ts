@@ -1,12 +1,12 @@
-import { SpecificationModel } from "../model/specification"; // importação do model de categoria
-import { ISpecificationRepository } from "../repositories/iSpecificationRepository"; // importação do repositório de categoria
+import { SpecificationModel } from "../../model/specification"; // importação do model de categoria
+import { ISpecificationRepository } from "../../repositories/iSpecificationRepository"; // importação do repositório de categoria
 
 interface IRequest { // tipagem dos itens a receber pelo request
   name: string;
   description: string;
 }
 
-class CreateSpecificationsService { // grupo único e principal
+class CreateSpecificationService { // grupo único e principal
   constructor(private specificationRepository: ISpecificationRepository) {} // criar o acesso ao repositório
 
   execute({ name, description }: IRequest): SpecificationModel { // função única e principal
@@ -22,4 +22,4 @@ class CreateSpecificationsService { // grupo único e principal
   }
 }
 
-export { CreateSpecificationsService }; // exporta tudo para ser utilizado em outro arquivo
+export { CreateSpecificationService }; // exporta tudo para ser utilizado em outro arquivo
