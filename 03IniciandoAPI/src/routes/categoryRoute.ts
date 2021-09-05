@@ -1,6 +1,7 @@
 import { Router } from "express"; // importa a dependência sobre rota
 import multer from "multer"; // dependencia que lida com importações csv
 import { createCategoryController } from "../modules/cars/useCases/createCategory";
+import { importCategoryController } from "../modules/cars/useCases/importCategory";
 import { listCategoryController } from "../modules/cars/useCases/listCategory";
 
 const categoryRoute = Router(); // método que ajuda na programação
@@ -18,9 +19,7 @@ categoryRoute.get("/", (request, response) => { // lista as categorias
 });
 
 categoryRoute.post("/import", upload.single("file"), (request, response) => { // importação de categoria
-  const { file } = request; // recebe o arquivo enviado
-
-  return response.json(file); // retorna algo ao chamador
+  return importCategoryController.execute(request, response); // chama o controlador responsável
 });
 
 export { categoryRoute }; // exporta todo o conteúdo para poder ser utilizado em outro arquivo
