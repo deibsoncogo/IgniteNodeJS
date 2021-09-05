@@ -29,8 +29,10 @@ class ImportCategoryService { // grupo único e principal
 
         categoriesLoadCategoryImport.push({ name, description }); // salva na variavel
       }).on("end", () => { // vai executar algo quando tudo finalizar
+        fs.promises.unlink(file.path); // vai excluir o arquivo recebido
         resolve(categoriesLoadCategoryImport); // retorna algo ao chamador sem erro
       }).on("error", (err) => { // vai executar algo se acontecer um erro
+        fs.promises.unlink(file.path); // vai excluir o arquivo recebido
         reject(err); // retorna um erro ao chamador
       });
     });
