@@ -1,5 +1,6 @@
 import csvParse from "csv-parse"; // dependencia que lida com arquivo csv
 import fs from "fs"; // dependencia nativa para lidar com arquivos
+import { CategoryModel } from "../../model/categoryModel";
 import { ICategoryRepository } from "../../repositories/iCategoryRepository";
 
 interface IImportCategory { // tipagem dos dados dentro do arquivo
@@ -36,10 +37,23 @@ class ImportCategoryService { // grupo único e principal
   }
 
   // função principal que vai gerenciar todo o service
-  async execute(file: Express.Multer.File): Promise<IImportCategory[]> {
+  async execute(file: Express.Multer.File): Promise<CategoryModel[] | undefined> {
     const categoriesExecuteImport = await this.loadCategory(file); // chama a função
 
-    return categoriesExecuteImport; // retorna algo ao chamador
+    const categorySaved: CategoryModel[] = []; // para retornar oque foi salvo
+
+    // para lidar os dados para assim conseguir salvar individualmente
+    categoriesExecuteImport.map(async (category) => {
+      const { name, description } = category; // recebe os dados desestruturado
+
+      const categoryAlreadyExists = this.categoryRepository.findByName(name); // chama a função
+
+      if (!categoryAlreadyExists) { // identifica se ja existe alguma categoria com este nome
+        categorySaved.push(this.categoryRepository.create({ name, description })); // chama a função
+      }
+    });
+
+    return categorySaved; // retorna algo ao chamador
   }
 }
 
