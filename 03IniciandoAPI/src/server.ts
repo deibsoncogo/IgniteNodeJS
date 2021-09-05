@@ -1,9 +1,17 @@
 import express from "express"; // realiza a importação da dependência
-import { router } from "./routes"; // importa o arquivo index de rota
+import swaggerUi from "swagger-ui-express"; // importa o arquivo index de rota
+import { router } from "./routes"; // define o formato dos dados utilizado no request e response
+import swaggerFile from "./swagger.json"; // dependencia que serve para criar uma documentação
 
 const app = express(); // método para facilitar o uso
 
-app.use(express.json()); // define o formato dos dados utilizado no request e response
+app.use(express.json());
+
+app.use( // para executar o swagger
+  "/docs", // rota da documentação
+  swaggerUi.serve, // para criar o servidor
+  swaggerUi.setup(swaggerFile), // onde está salvo a documentação em json
+);
 
 app.use(router); // permite a utilização das rotas
 

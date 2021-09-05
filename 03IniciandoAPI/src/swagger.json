@@ -1,0 +1,9 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Rocketseat Ignite - RentalX documentation",
+    "description": "Uma aplicação para lidar com aluguel de carro",
+    "version": "1.0.0",
+    "contact": { "email": "deibsoncogo@outlook.com" }
+  }
+}
