@@ -5,5 +5,35 @@
     "description": "Uma aplicação para lidar com aluguel de carro",
     "version": "1.0.0",
     "contact": { "email": "deibsoncogo@outlook.com" }
+  },
+  "paths": {
+    "/category": {
+      "post": {
+        "tags": ["Categoria"],
+        "summary": "Cria uma categoria",
+        "description": "Essa rota serve para criar uma nova categoria",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "description": { "type": "string" }
+                },
+                "example": {
+                  "name": "Nome da categoria",
+                  "description": "Descrevemos oque seria essa categoria"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Categoria criada" },
+          "500": { "description": "Já existe uma categoria com este nome" }
+        }
+      }
+    }
   }
 }
