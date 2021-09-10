@@ -1,0 +1,10 @@
+version: "3.7" # versão do Docker
+
+services: # grupo de containers
+  app: # cria um container
+    build: . # define que a aplicação será a imagem
+    container_name: ignitenodejsiniciandoapiapp # define o nome para o usuário
+    ports: # define as postas de execução
+      - 3333:3333
+    volumes: # define a criação do volume
+      - .:/usr/app
