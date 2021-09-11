@@ -1,3 +1,5 @@
+import "reflect-metadata"; // esta dependência deve ser o primeiro de tudo
+import "./database"; // o item importado vai funcionar em toda a aplicação
 import express from "express"; // realiza a importação da dependência
 import swaggerUi from "swagger-ui-express"; // importa o arquivo index de rota
 import { router } from "./routes"; // define o formato dos dados utilizado no request e response
