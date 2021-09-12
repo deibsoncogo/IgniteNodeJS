@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
 import { SpecificationModel } from "../../model/specification"; // importação do model de categoria
 import { ISpecificationRepository } from "../../repositories/iSpecificationRepository"; // importação do repositório de categoria
 
@@ -6,8 +7,12 @@ interface IRequest { // tipagem dos itens a receber pelo request
   description: string;
 }
 
+@injectable() // para permite a injeção do TSyringe nesta classe
 class CreateSpecificationService { // grupo único e principal
-  constructor(private specificationRepository: ISpecificationRepository) {} // criar o acesso ao repositório
+  constructor( // criar o acesso ao repositório
+    @inject("SpecificationRepository") // realiza a injeção do TSyringe
+    private specificationRepository: ISpecificationRepository, // criar o acesso ao repositório
+  ) {}
 
   execute({ name, description }: IRequest): SpecificationModel { // função única e principal
     const specificationAlreadyExists = this.specificationRepository.findByName(name); // chama a função

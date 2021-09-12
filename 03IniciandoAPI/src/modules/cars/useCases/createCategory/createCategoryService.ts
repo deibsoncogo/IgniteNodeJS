@@ -21,7 +21,7 @@ class CreateCategoryService { // grupo único e principal
       throw new Error("Já existe uma categoria com este nome"); // chama a função de erro
     }
 
-    const category = this.categoryRepository.create({ name, description }); // chama a função
+    const category = await this.categoryRepository.create({ name, description }); // chama a função
 
     return category; // retorna algo ao chamador
   }

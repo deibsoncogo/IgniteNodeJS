@@ -1,12 +1,13 @@
 import { Request, Response } from "express"; // importando os arquivos necessário
+import { container } from "tsyringe"; // dependência que realiza injeção dos arquivos
 import { ListCategoryService } from "./listCategoryService";
 
 class ListCategoryController {
-  // instancia para poder utilizar todos recursos
-  constructor(private listCategoryService: ListCategoryService) {}
+  async execute(request: Request, response: Response): Promise<Response> { // função única
+    // vai criar o instanciamento automatico pelo TSyringe para poder utilizar os recursos
+    const listCategoryService = container.resolve(ListCategoryService);
 
-  execute(request: Request, response: Response): Response { // função única
-    const all = this.listCategoryService.execute(); // chama a função
+    const all = await listCategoryService.execute(); // chama a função
 
     return response.status(200).json(all); // retornar algo ao chamador
   }

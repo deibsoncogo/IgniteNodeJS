@@ -1,6 +1,7 @@
 import csvParse from "csv-parse"; // dependencia que lida com arquivo csv
 import fs from "fs"; // dependencia nativa para lidar com arquivos
-import { CategoryModel } from "../../model/categoryModel";
+import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
+import { CategoryEntity } from "../../model/categoryEntity";
 import { ICategoryRepository } from "../../repositories/iCategoryRepository";
 
 interface IImportCategory { // tipagem dos dados dentro do arquivo
@@ -8,8 +9,12 @@ interface IImportCategory { // tipagem dos dados dentro do arquivo
   description: string;
 }
 
+@injectable() // para permite a injeção do TSyringe nesta classe
 class ImportCategoryService { // grupo único e principal
-  constructor(private categoryRepository: ICategoryRepository) {} // criar o acesso ao repositório de categoria
+  constructor( // criar o acesso ao repositório de categoria
+    @inject("CategoryRepository") // realiza a injeção do TSyringe
+    private categoryRepository: ICategoryRepository, // criar o acesso ao repositório
+  ) {}
 
   // função secundária que vai dar todas tratativas do arquivo
   loadCategory(file: Express.Multer.File): Promise<IImportCategory[]> {
@@ -39,21 +44,33 @@ class ImportCategoryService { // grupo único e principal
   }
 
   // função principal que vai gerenciar todo o service
-  async execute(file: Express.Multer.File): Promise<CategoryModel[] | undefined> {
+  async execute(file: Express.Multer.File): Promise<CategoryEntity[] | undefined> {
+    console.log("Service - Inicio");
+
     const categoriesExecuteImport = await this.loadCategory(file); // chama a função
 
-    const categorySaved: CategoryModel[] = []; // para retornar oque foi salvo
+    const categorySaved: CategoryEntity[] = []; // para retornar oque foi salvo
 
-    // para lidar os dados para assim conseguir salvar individualmente
+    // para lidar com os dados para assim conseguir salvar individualmente
     categoriesExecuteImport.map(async (category) => {
+      console.log("Service - Map inicio");
       const { name, description } = category; // recebe os dados desestruturado
 
-      const categoryAlreadyExists = this.categoryRepository.findByName(name); // chama a função
+      const categoryAlreadyExists = await this.categoryRepository.findByName(name); // chama a função
 
       if (!categoryAlreadyExists) { // identifica se ja existe alguma categoria com este nome
-        categorySaved.push(this.categoryRepository.create({ name, description })); // chama a função
+        const categorySavedAn = await this.categoryRepository.create({ name, description }); // chama a função
+
+        console.log("Antes do push", categorySavedAn);
+
+        categorySaved.push(categorySavedAn); // salva a categoria criada para poder retornar algo ao chamador
+
+        console.log("Depois do push", categorySaved);
       }
+      console.log("Service - Map final");
     });
+
+    console.log("Service - Final", categorySaved);
 
     return categorySaved; // retorna algo ao chamador
   }
