@@ -1,6 +1,6 @@
 import { Router } from "express"; // importa a dependência sobre rota
 import multer from "multer"; // dependencia que lida com importações csv
-import createCategoryController from "../modules/cars/useCases/createCategory";
+import { CreateCategoryController } from "../modules/cars/useCases/createCategory/createCategoryController";
 import { importCategoryController } from "../modules/cars/useCases/importCategory";
 import { listCategoryController } from "../modules/cars/useCases/listCategory";
 
@@ -10,9 +10,10 @@ const upload = multer({ // método para configurar e ajudar na utilização do m
   dest: "./tmp", // local de salvamento do arquivo recebido
 });
 
-categoryRoute.post("/", (request, response) => { // cria uma categoria
-  return createCategoryController().execute(request, response); // chama o controlador responsável
-});
+// realiza os instanciamento para podemos utilizar os arquivos corretamente
+const createCategoryController = new CreateCategoryController();
+
+categoryRoute.post("/", createCategoryController.execute); // cria uma categoria
 
 categoryRoute.get("/", (request, response) => { // lista as categorias
   return listCategoryController.execute(request, response); // chama o controlador responsável
