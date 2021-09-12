@@ -2,10 +2,13 @@ import { CategoryRepository } from "../../repositories/implementations/categoryR
 import { CreateCategoryController } from "./createCategoryController";
 import { CreateCategoryService } from "./createCategoryService";
 
-const categoryRepository = CategoryRepository.getInstance();
-const createCategoryService = new CreateCategoryService(categoryRepository);
-const createCategoryController = new CreateCategoryController(createCategoryService);
+// cria uma função para os códigos serem executados somente quando chamado
+export default (): CreateCategoryController => {
+  const categoryRepository = new CategoryRepository();
+  const createCategoryService = new CreateCategoryService(categoryRepository);
+  const createCategoryController = new CreateCategoryController(createCategoryService);
 
-export { createCategoryController };
+  return createCategoryController;
+};
 
 // cria todos instanciamentos necessários e exporta eles

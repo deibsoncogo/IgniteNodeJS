@@ -5,10 +5,10 @@ class CreateCategoryController {
   // instancia para poder utilizar todos recursos
   constructor(private createCategoryService: CreateCategoryService) {}
 
-  execute(request: Request, response: Response): Response { // função única
+  async execute(request: Request, response: Response): Promise<Response> { // função única
     const { name, description } = request.body; // recebe os dados dentro da requisição
 
-    const category = this.createCategoryService.execute({ name, description }); // chama a função
+    const category = await this.createCategoryService.execute({ name, description }); // chama a função
 
     return response.status(201).json(category); // retornar algo ao chamado
   }

@@ -1,4 +1,4 @@
-import { CategoryModel } from "../../model/categoryModel"; // importação do model de categoria
+import { CategoryEntity } from "../../model/categoryEntity"; // importação do model de categoria
 import { ICategoryRepository } from "../../repositories/iCategoryRepository"; // importação do repositório de categoria
 
 interface IRequest { // tipagem dos itens a receber pelo request
@@ -9,8 +9,8 @@ interface IRequest { // tipagem dos itens a receber pelo request
 class CreateCategoryService { // grupo único e principal
   constructor(private categoryRepository: ICategoryRepository) {} // criar o acesso ao repositório
 
-  execute({ name, description }: IRequest): CategoryModel { // função única e principal
-    const categoryAlreadyExists = this.categoryRepository.findByName(name); // chama a função
+  async execute({ name, description }: IRequest): Promise<CategoryEntity> { // função única e principal
+    const categoryAlreadyExists = await this.categoryRepository.findByName(name); // chama a função
 
     if (categoryAlreadyExists) { // evita a duplicação do nome de categoria
       throw new Error("Já existe uma categoria com este nome"); // chama a função de erro
