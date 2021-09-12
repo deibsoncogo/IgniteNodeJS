@@ -1,15 +1,16 @@
-import { CategoryModel } from "../../model/categoryModel";
+import { getRepository, Repository } from "typeorm";
+import { CategoryEntity } from "../../model/categoryEntity";
 import { ICategoryRepository, ICreateRepositoryDTO } from "../iCategoryRepository";
 
 class CategoryRepository implements ICategoryRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso
-  private categories: CategoryModel[]; // variável que vai ser um banco de dados volátil com tipagem
+  private repositoryCategory: Repository<CategoryEntity>; // variável que vai se tornar o acesso ao banco de dados
 
   private static INSTANCE: CategoryRepository; // cria uma variável privada estática tipada
 
   // adicionamos private para bloquear acesso externo
   private constructor() { // serve para criar algo a partir do instanciamento (Comando new)
-    this.categories = []; // cria o banco de dados volátil com tipagem
+    this.repositoryCategory = getRepository(CategoryEntity); // cria o acesso ao banco de dados com tipagem
   }
 
   public static getInstance(): CategoryRepository { // método que vai criar o BD volátil com tipagem
@@ -20,28 +21,23 @@ class CategoryRepository implements ICategoryRepository { // implementes vincula
     return CategoryRepository.INSTANCE; // retornar o banco de dados volátil com tipagem
   }
 
-  create({ name, description }: ICreateRepositoryDTO): CategoryModel { // função que vai criar uma categoria
-    // instancia para conseguimos utilizar o constructor dentro do arquivo chamado
-    const category = new CategoryModel();
+  async create({ name, description }: ICreateRepositoryDTO): Promise<CategoryEntity> { // função que vai criar uma categoria
+    // prepara os dados antes de salvar
+    const category = this.repositoryCategory.create({ name, description });
 
-    // Object server para vincular dados a um objeto com facilidade
-    Object.assign(category, { // prepara os dados antes de salvar
-      name,
-      description,
-      createdAt: new Date(),
-    });
+    await this.repositoryCategory.save(category); // salva os dados dentro do banco de dados
 
-    this.categories.push(category); // salva os dados dentro do banco de dados
-
-    return category; // retorna ao chamador
+    return category; // retorna algo ao chamador
   }
 
-  list(): CategoryModel[] { // função que vai listar todas categorias cadastrada
-    return this.categories; // retorna algo ao chamador
+  async list(): Promise<CategoryEntity[]> { // função que vai listar todas categorias cadastrada
+    const categoryAll = await this.repositoryCategory.find(); // busca as informações no DB
+
+    return categoryAll; // retorna algo ao chamador
   }
 
-  findByName(name: string): CategoryModel { // função que vai buscar uma categoria com este nome
-    const category = this.categories.find((f) => f.name === name); // realiza a busca
+  async findByName(name: string): Promise<CategoryEntity> { // função que vai buscar uma categoria com este nome
+    const category = await this.repositoryCategory.findOne({ name }); // realiza a busca
 
     return category; // retorna algo ao chamador
   }

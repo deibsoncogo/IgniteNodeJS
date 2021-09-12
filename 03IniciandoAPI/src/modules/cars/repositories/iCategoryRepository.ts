@@ -1,4 +1,4 @@
-import { CategoryModel } from "../model/categoryModel";
+import { CategoryEntity } from "../model/categoryEntity";
 
 interface ICreateRepositoryDTO { // tipagem a parte para não vincular a rota com o BD
   name: string;
@@ -6,9 +6,9 @@ interface ICreateRepositoryDTO { // tipagem a parte para não vincular a rota co
 }
 
 interface ICategoryRepository { // a interface vai ser o contrato
-  create({ name, description }: ICreateRepositoryDTO): CategoryModel;
-  list(): CategoryModel[]; // define o nome da função e que não recebe nenhum dados e retornar CategoryModel[]
-  findByName(name: string): CategoryModel;
+  create({ name, description }: ICreateRepositoryDTO): Promise<CategoryEntity>;
+  list(): Promise<CategoryEntity[]>; // define o nome da função e que não recebe nenhum dados e retornar CategoryEntity[]
+  findByName(name: string): Promise<CategoryEntity>;
 }
 
 export { ICategoryRepository, ICreateRepositoryDTO }; // exporta para ser chamado quando for necessário
