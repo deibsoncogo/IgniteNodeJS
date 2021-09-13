@@ -1,4 +1,4 @@
-import { CategoryEntity } from "../model/categoryEntity";
+import { CategoryEntity } from "../entities/categoryEntity";
 
 interface ICreateRepositoryDTO { // tipagem a parte para não vincular a rota com o BD
   name: string;

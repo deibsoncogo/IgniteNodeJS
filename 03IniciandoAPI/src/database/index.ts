@@ -8,6 +8,6 @@ interface IOptions { // definição dos dados recebido
 getConnectionOptions().then((options) => {
   const newOptions = options as IOptions;
   newOptions.host = "database";
-  // criação a conexão (Model <--> ORM <--> Banco de dados)
+  // criação a conexão (Model/Entity <--> ORM <--> Banco de dados)
   createConnection({ ...options });
 });

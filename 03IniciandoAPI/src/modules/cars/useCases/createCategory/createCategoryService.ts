@@ -1,5 +1,5 @@
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
-import { CategoryEntity } from "../../model/categoryEntity"; // importação do model de categoria
+import { CategoryEntity } from "../../entities/categoryEntity"; // importação da entidade de categoria
 import { ICategoryRepository } from "../../repositories/iCategoryRepository"; // importação do repositório de categoria
 
 interface IRequest { // tipagem dos itens a receber pelo request

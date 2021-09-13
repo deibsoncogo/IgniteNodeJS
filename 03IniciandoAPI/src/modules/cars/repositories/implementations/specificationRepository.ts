@@ -1,32 +1,26 @@
-import { SpecificationModel } from "../../model/specification";
+import { getRepository, Repository } from "typeorm";
+import { SpecificationEntity } from "../../entities/specificationEntity";
 import { ISpecificationRepository, ISpecificationRepositoryDTO } from "../iSpecificationRepository";
 
 class SpecificationRepository implements ISpecificationRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso
-  private specifications: SpecificationModel[]; // banco de dados volátil com tipagem
+  private repositorySpecification: Repository<SpecificationEntity>;
 
-  constructor() { // para criar algo
-    this.specifications = []; // cria o banco de dados
+  constructor() { // serve para criar algo a partir do instanciamento com o comando new
+    this.repositorySpecification = getRepository(SpecificationEntity); // cria o acesso ao banco de dados com tipagem
   }
 
-  create({ name, description }: ISpecificationRepositoryDTO): SpecificationModel {
-    // instancia para conseguimos utilizar o constructor dentro do arquivo chamado
-    const specification = new SpecificationModel();
+  async create({ name, description }: ISpecificationRepositoryDTO): Promise<SpecificationEntity> {
+    // prepara os dados antes de salvar
+    const specification = this.repositorySpecification.create({ name, description });
 
-    // Object server para vincular dados a um objeto com facilidade
-    Object.assign(specification, { // prepara os dados antes de salvar
-      name,
-      description,
-      createdAt: new Date(),
-    });
-
-    this.specifications.push(specification); // salva os dados dentro do banco de dados
+    await this.repositorySpecification.save(specification); // salva os dados dentro do banco de dados
 
     return specification; // retorna ao chamador
   }
 
-  findByName(name: string): SpecificationModel { // função que vai buscar uma categoria com este nome
-    const specification = this.specifications.find((f) => f.name === name); // realiza a busca
+  async findByName(name: string): Promise<SpecificationEntity> { // função que vai buscar uma categoria com este nome
+    const specification = await this.repositorySpecification.findOne({ name }); // realiza a busca
 
     return specification; // retorna algo ao chamador
   }

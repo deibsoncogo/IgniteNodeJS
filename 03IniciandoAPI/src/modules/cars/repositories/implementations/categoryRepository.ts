@@ -1,12 +1,12 @@
 import { getRepository, Repository } from "typeorm";
-import { CategoryEntity } from "../../model/categoryEntity";
+import { CategoryEntity } from "../../entities/categoryEntity";
 import { ICategoryRepository, ICreateRepositoryDTO } from "../iCategoryRepository";
 
 class CategoryRepository implements ICategoryRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso
   private repositoryCategory: Repository<CategoryEntity>; // variável que vai se tornar o acesso ao banco de dados
 
-  constructor() { // serve para criar algo a partir do instanciamento (Comando new)
+  constructor() { // serve para criar algo a partir do instanciamento com o comando new
     this.repositoryCategory = getRepository(CategoryEntity); // cria o acesso ao banco de dados com tipagem
   }
 

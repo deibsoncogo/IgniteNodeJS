@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm"; // importações necessárias
 
-export class createCategory1631445672751 implements MigrationInterface { // classe principal
+export class createSpecification1631490241236 implements MigrationInterface { // classe principal
   public async up(queryRunner: QueryRunner): Promise<void> { // função de criação
     await queryRunner.createTable( // cria uma tabela
       new Table({ // necessário para especificar oque vai ter dentro da tabela
-        name: "categories", // nome da tabela
+        name: "specifications", // nome da tabela
         columns: [ // define as colunas que ela vai ter
           {
             name: "id",
@@ -30,6 +30,6 @@ export class createCategory1631445672751 implements MigrationInterface { // clas
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> { // função de desfazer
-    await queryRunner.dropTable("categories"); // exclui uma tabela
+    await queryRunner.dropTable("specifications"); // exclui uma tabela
   }
 }
