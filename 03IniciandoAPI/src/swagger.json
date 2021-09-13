@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Rocketseat Ignite - RentalX documentation",
+    "title": "Rocketseat Ignite - RentX documentation",
     "description": "Uma aplicação para lidar com aluguel de carro",
     "version": "1.0.0",
     "contact": { "email": "deibsoncogo@outlook.com" }
@@ -57,6 +57,65 @@
             }
           }
         }
+      }
+    },
+    "/category/import": {
+      "post": {
+        "tags": ["Categoria"],
+        "summary":"Cria várias categorias",
+        "description":"Essa rota serve para criar várias categorias",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description":"Categoria criada" }
+        }
+      }
+    },
+    "/specification": {
+      "post": {
+        "tags": ["Especificação"],
+        "summary": "Cria uma especificação",
+        "description": "Essa rota serve para criar uma nova especificação",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definition/Specification"
+              },
+              "example": {
+                "name":"Nome da especificação",
+                "description":"Descrevemos oque seria essa especificação"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Especificação criada" },
+          "500": { "description": "Já existe uma especificação com este nome" }
+        }
+      }
+    }
+  },
+
+  "definition": {
+    "Specification" : {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" }
       }
     }
   }
