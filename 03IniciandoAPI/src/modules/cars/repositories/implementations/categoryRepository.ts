@@ -1,6 +1,7 @@
 import { getRepository, Repository } from "typeorm";
+import { ICreateCategoryDTO } from "../../dtos/iCreateRepositoryDto";
 import { CategoryEntity } from "../../entities/categoryEntity";
-import { ICategoryRepository, ICreateRepositoryDTO } from "../iCategoryRepository";
+import { ICategoryRepository } from "../iCategoryRepository";
 
 class CategoryRepository implements ICategoryRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso
@@ -10,7 +11,7 @@ class CategoryRepository implements ICategoryRepository { // implementes vincula
     this.repositoryCategory = getRepository(CategoryEntity); // cria o acesso ao banco de dados com tipagem
   }
 
-  async create({ name, description }: ICreateRepositoryDTO): Promise<CategoryEntity> { // função que vai criar uma categoria
+  async create({ name, description }: ICreateCategoryDTO): Promise<CategoryEntity> { // função que vai criar uma categoria
     // prepara os dados antes de salvar
     const category = this.repositoryCategory.create({ name, description });
 
@@ -32,4 +33,4 @@ class CategoryRepository implements ICategoryRepository { // implementes vincula
   }
 }
 
-export { CategoryRepository }; // exporta para poder ser utilizado por outro arquivo
+export { CategoryRepository }; // exporta para poder ser chamado

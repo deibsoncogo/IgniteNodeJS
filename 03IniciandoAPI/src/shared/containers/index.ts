@@ -1,4 +1,6 @@
 import { container } from "tsyringe"; // importando os itens que iremos usar
+import { UserRepository } from "../../modules/accountrs/repositories/implementations/userRepository";
+import { IUserRepository } from "../../modules/accountrs/repositories/iUserRepository";
 import { ICategoryRepository } from "../../modules/cars/repositories/iCategoryRepository";
 import { CategoryRepository } from "../../modules/cars/repositories/implementations/categoryRepository";
 import { SpecificationRepository } from "../../modules/cars/repositories/implementations/specificationRepository";
@@ -12,4 +14,9 @@ container.registerSingleton<ICategoryRepository>(
 // cria os instanciamentos automaticamente sobre as especificações
 container.registerSingleton<ISpecificationRepository>(
   "SpecificationRepository", SpecificationRepository,
+);
+
+// cria os instanciamentos automaticamente sobre os usuários
+container.registerSingleton<IUserRepository>(
+  "UserRepository", UserRepository,
 );
