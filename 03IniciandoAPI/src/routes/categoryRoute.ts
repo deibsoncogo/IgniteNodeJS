@@ -10,7 +10,7 @@ const upload = multer({ // método para configurar e ajudar na utilização do m
   dest: "./tmp", // local de salvamento do arquivo recebido
 });
 
-// realiza os instanciamento para podemos utilizar os arquivos corretamente
+// realiza o instanciamento para assim executar o arquivo corretamente
 const createCategoryController = new CreateCategoryController();
 const listCategoryController = new ListCategoryController();
 const importCategoryController = new ImportCategoryController();
@@ -19,4 +19,4 @@ categoryRoute.post("/", createCategoryController.execute); // cria uma categoria
 categoryRoute.get("/", listCategoryController.execute); // lista as categorias
 categoryRoute.post("/import", upload.single("file"), importCategoryController.execute); // importação de categoria
 
-export { categoryRoute }; // exporta todo o conteúdo para poder ser utilizado em outro arquivo
+export { categoryRoute }; // exporta para poder ser chamado

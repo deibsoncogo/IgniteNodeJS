@@ -3,9 +3,9 @@ import { CreateSpecificationController } from "../modules/cars/useCases/createSp
 
 const specificationRoute = Router(); // método que ajuda na programação
 
-// realiza os instanciamento para podemos utilizar os arquivos corretamente
+// realiza o instanciamento para assim executar o arquivo corretamente
 const createSpecificationController = new CreateSpecificationController();
 
 specificationRoute.post("/", createSpecificationController.execute); // cria uma especificação
 
-export { specificationRoute }; // exporta todo o conteúdo para poder ser utilizado em outro arquivo
+export { specificationRoute }; // exporta para poder ser chamado
