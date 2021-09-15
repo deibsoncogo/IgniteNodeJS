@@ -12,10 +12,10 @@ class UserRepository implements IUserRepository { // implementes vincula a tipag
   }
 
   async create(
-    { name, userName, password, email, driverLicense }: ICreateUserDTO,
+    { name, email, password, driverLicense }: ICreateUserDTO,
   ): Promise<UserEntity> { // função que vai criar um usuário
     // prepara os dados antes de salvar
-    const user = this.repositoryUser.create({ name, userName, password, email, driverLicense });
+    const user = this.repositoryUser.create({ name, email, password, driverLicense });
 
     await this.repositoryUser.save(user); // salva os dados dentro do banco de dados
 

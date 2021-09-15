@@ -11,9 +11,9 @@ class CreateUserService { // grupo único e principal
   ) {}
 
   async execute(
-    { name, userName, password, email, driverLicense }: ICreateUserDTO,
+    { name, email, password, driverLicense }: ICreateUserDTO,
   ): Promise<UserEntity> { // função única e principal
-    const user = await this.userRepository.create({ name, userName, password, email, driverLicense }); // chama a função
+    const user = await this.userRepository.create({ name, email, password, driverLicense }); // chama a função
 
     return user; // retorna algo ao chamador
   }

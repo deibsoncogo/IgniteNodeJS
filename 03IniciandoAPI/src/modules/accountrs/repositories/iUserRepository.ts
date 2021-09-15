@@ -2,7 +2,7 @@ import { ICreateUserDTO } from "../dtos/ICreateUserDto"; // importando a tipagem
 import { UserEntity } from "../entities/userEntity"; // importando a entidade
 
 interface IUserRepository { // vai servir como um contrato mostrando as funções permitida
-  create({ name, userName, password, email, driverLicense }: ICreateUserDTO): Promise<UserEntity>;
+  create({ name, email, password, driverLicense }: ICreateUserDTO): Promise<UserEntity>;
 }
 
 export { IUserRepository }; // exportar para poder ser chamado

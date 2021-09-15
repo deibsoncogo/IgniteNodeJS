@@ -1,8 +1,7 @@
 interface ICreateUserDTO { // cria uma tipagem para a criação de usuário
   name: string;
-  userName: string;
-  password: string;
   email: string;
+  password: string;
   driverLicense: string;
 }
 

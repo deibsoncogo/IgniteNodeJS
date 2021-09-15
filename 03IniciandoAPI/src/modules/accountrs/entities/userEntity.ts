@@ -10,13 +10,10 @@ class UserEntity { // tipagem para o banco de dados
   name: string;
 
   @Column() // não precisamos colocar o nome da coluna quando eles são iguais
-  userName: string;
+  email: string;
 
   @Column()
   password: string;
-
-  @Column()
-  email: string;
 
   @Column()
   driverLicense: string;
