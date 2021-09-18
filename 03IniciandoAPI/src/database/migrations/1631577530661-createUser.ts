@@ -18,11 +18,11 @@ export class createUser1631577530661 implements MigrationInterface { // classe p
           {
             name: "userName",
             type: "varchar",
-            isUnique: true, // define que não pode existir dado duplicado
           },
           {
             name: "email",
             type: "varchar",
+            isUnique: true, // define que não pode existir dado duplicado
           },
           {
             name: "password",

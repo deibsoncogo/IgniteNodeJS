@@ -4,23 +4,23 @@ import { ISpecificationRepository, ISpecificationRepositoryDTO } from "../iSpeci
 
 class SpecificationRepository implements ISpecificationRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso
-  private repositorySpecification: Repository<SpecificationEntity>;
+  private specificationRepository: Repository<SpecificationEntity>;
 
   constructor() { // serve para criar algo a partir do instanciamento com o comando new
-    this.repositorySpecification = getRepository(SpecificationEntity); // cria o acesso ao banco de dados com tipagem
+    this.specificationRepository = getRepository(SpecificationEntity); // cria o acesso ao banco de dados com tipagem
   }
 
   async create({ name, description }: ISpecificationRepositoryDTO): Promise<SpecificationEntity> {
     // prepara os dados antes de salvar
-    const specification = this.repositorySpecification.create({ name, description });
+    const specification = this.specificationRepository.create({ name, description });
 
-    await this.repositorySpecification.save(specification); // salva os dados dentro do banco de dados
+    await this.specificationRepository.save(specification); // salva os dados dentro do banco de dados
 
     return specification; // retorna ao chamador
   }
 
   async findByName(name: string): Promise<SpecificationEntity> { // função que vai buscar uma categoria com este nome
-    const specification = await this.repositorySpecification.findOne({ name }); // realiza a busca
+    const specification = await this.specificationRepository.findOne({ name }); // realiza a busca
 
     return specification; // retorna algo ao chamador
   }
