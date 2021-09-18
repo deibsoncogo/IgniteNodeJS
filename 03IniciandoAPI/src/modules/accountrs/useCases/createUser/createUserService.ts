@@ -1,3 +1,4 @@
+import { hash } from "bcryptjs"; // dependência que realizar criptografia dos dados
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
 import { ICreateUserDTO } from "../../dtos/ICreateUserDto"; // importação da tipagem
 import { UserEntity } from "../../entities/userEntity"; // importação da entidade
@@ -13,7 +14,20 @@ class CreateUserService { // grupo único e principal
   async execute(
     { name, email, password, driverLicense }: ICreateUserDTO,
   ): Promise<UserEntity> { // função única e principal
-    const user = await this.userRepository.create({ name, email, password, driverLicense }); // chama a função
+    const userAlreadyExists = await this.userRepository.findByEmail(email); // chama a função
+
+    if (userAlreadyExists) { // identifica se já existe este email cadastrado
+      throw new Error("Já existe um usuário com este email");
+    }
+
+    const passwordHash = await hash(password, 8); // cria a criptografia da senha
+
+    const user = await this.userRepository.create({ // chama a função
+      name,
+      email,
+      password: passwordHash,
+      driverLicense,
+    });
 
     return user; // retorna algo ao chamador
   }

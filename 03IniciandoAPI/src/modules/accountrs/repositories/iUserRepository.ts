@@ -3,6 +3,7 @@ import { UserEntity } from "../entities/userEntity"; // importando a entidade
 
 interface IUserRepository { // vai servir como um contrato mostrando as funções permitida
   create({ name, email, password, driverLicense }: ICreateUserDTO): Promise<UserEntity>;
+  findByEmail(email: string): Promise<UserEntity>;
 }
 
 export { IUserRepository }; // exportar para poder ser chamado
