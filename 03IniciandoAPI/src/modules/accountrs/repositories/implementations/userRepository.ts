@@ -22,8 +22,14 @@ class UserRepository implements IUserRepository { // implementes vincula a tipag
     return user; // retorna algo ao chamador
   }
 
-  async findByEmail(email: string): Promise<UserEntity> { // função que busca um usuario por email
+  async findByEmail(email: string): Promise<UserEntity> { // função que busca um usuario pelo email
     const user = await this.userRepository.findOne({ email }); // busca o usuario
+
+    return user; // retorna algo ao chamador
+  }
+
+  async findById(id: string): Promise<UserEntity> { // função que busca um usuario pelo id
+    const user = await this.userRepository.findOne({ id }); // busca o usuario
 
     return user; // retorna algo ao chamador
   }
