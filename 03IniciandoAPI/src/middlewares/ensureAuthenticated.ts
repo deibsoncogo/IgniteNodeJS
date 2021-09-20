@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express"; // framework muito importante para nossa aplicação
 import { verify } from "jsonwebtoken"; // dependência sobre token json
+import { AppError } from "../errors/appError";
 import { UserRepository } from "../modules/accountrs/repositories/implementations/userRepository";
 
 interface IToken { // tipagem do token
@@ -14,7 +15,7 @@ async function EnsureAuthenticatedMiddleware( // função unica que será nosso 
   const authHeader = request.headers.authorization; // recebe os dados pelo cabeçalho no campo padrão de autorização
 
   if (!authHeader) { // vai barrar se não receber o token
-    throw new Error("Token não informado");
+    throw new AppError("Token não informado", 401);
   }
 
   // por padrão o token vem com a palavra Bearer na frente
@@ -30,12 +31,12 @@ async function EnsureAuthenticatedMiddleware( // função unica que será nosso 
     const user = await userRepository.findById(userId); // chama a função que busca um usuário pelo ID
 
     if (!user) { // vai barrar se o ID informado não existir
-      throw new Error("Usuário não encontrado");
+      throw new AppError("Usuário não encontrado", 401);
     }
 
     next(); // faz o middleware finalizar assim voltando para o chamador
   } catch { // serve para captar um erro
-    throw new Error("Token inválido"); // retornar este erro ao chamador
+    throw new AppError("Token inválido", 401); // retornar este erro ao chamador
   }
 }
 

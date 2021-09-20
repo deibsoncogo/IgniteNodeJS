@@ -1,5 +1,6 @@
 import { hash } from "bcryptjs"; // dependência que realizar criptografia dos dados
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
+import { AppError } from "../../../../errors/appError";
 import { ICreateUserDTO } from "../../dtos/ICreateUserDto"; // importação da tipagem
 import { UserEntity } from "../../entities/userEntity"; // importação da entidade
 import { IUserRepository } from "../../repositories/iUserRepository"; // importação do contrato do repositório
@@ -17,7 +18,7 @@ class CreateUserService { // grupo único e principal
     const userAlreadyExists = await this.userRepository.findByEmail(email); // chama a função
 
     if (userAlreadyExists) { // identifica se já existe este email cadastrado
-      throw new Error("Já existe um usuário com este email");
+      throw new AppError("Já existe um usuário com este email");
     }
 
     const passwordHash = await hash(password, 8); // cria a criptografia da senha

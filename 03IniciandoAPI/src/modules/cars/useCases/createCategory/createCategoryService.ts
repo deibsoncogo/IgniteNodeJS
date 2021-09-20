@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
+import { AppError } from "../../../../errors/appError";
 import { ICreateCategoryDTO } from "../../dtos/iCreateRepositoryDto"; // importação da tipagem
 import { CategoryEntity } from "../../entities/categoryEntity"; // importação da entidade de categoria
 import { ICategoryRepository } from "../../repositories/iCategoryRepository"; // importação do repositório de categoria
@@ -14,7 +15,7 @@ class CreateCategoryService { // grupo único e principal
     const categoryAlreadyExists = await this.categoryRepository.findByName(name); // chama a função
 
     if (categoryAlreadyExists) { // evita a duplicação do nome de categoria
-      throw new Error("Já existe uma categoria com este nome"); // chama a função de erro
+      throw new AppError("Já existe uma categoria com este nome"); // chama a função de erro
     }
 
     const category = await this.categoryRepository.create({ name, description }); // chama a função

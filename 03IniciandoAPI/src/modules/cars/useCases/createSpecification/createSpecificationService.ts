@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
+import { AppError } from "../../../../errors/appError";
 import { SpecificationEntity } from "../../entities/specificationEntity"; // importação da entidade de categoria
 import { ISpecificationRepository } from "../../repositories/iSpecificationRepository"; // importação do repositório de categoria
 
@@ -18,7 +19,7 @@ class CreateSpecificationService { // grupo único e principal
     const specificationAlreadyExists = await this.specificationRepository.findByName(name); // chama a função
 
     if (specificationAlreadyExists) { // evita a duplicação do nome de categoria
-      throw new Error("Já existe uma especificação com este nome"); // chama a função de erro
+      throw new AppError("Já existe uma especificação com este nome"); // chama a função de erro
     }
 
     const specification = await this.specificationRepository.create({ name, description }); // chama a função

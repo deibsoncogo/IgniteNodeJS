@@ -1,6 +1,7 @@
 import { compare } from "bcryptjs"; // dependência sobre criptografia
 import { sign } from "jsonwebtoken"; // dependência sobre json token
 import { inject, injectable } from "tsyringe"; // dependência sobre injeção de repositório
+import { AppError } from "../../../../errors/appError";
 import { IAuthenticateUser } from "../../dtos/IAuthenticateUser";
 import { IUserRepository } from "../../repositories/iUserRepository";
 
@@ -20,14 +21,14 @@ class AuthenticateUserService { // classe única
     const user = await this.userRepository.findByEmail(email); // chama a função
 
     if (!user) { // vai barra se o email passado não existir no banco de dados
-      throw new Error("Email inválido");
+      throw new AppError("Email inválido");
     }
 
     // vai comparar a senha passada com a senha cadastrada
     const passwordMatch = await compare(password, user.password);
 
     if (!passwordMatch) { // se as senhas forem diferente vai barrar
-      throw new Error("Senha inválida");
+      throw new AppError("Senha inválida");
     }
 
     const token = sign( // cria o token
