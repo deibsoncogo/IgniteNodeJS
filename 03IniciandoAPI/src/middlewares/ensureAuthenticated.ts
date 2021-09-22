@@ -34,6 +34,8 @@ async function EnsureAuthenticatedMiddleware( // função unica que será nosso 
       throw new AppError("Usuário não encontrado", 401);
     }
 
+    request.userId = userId; // insere o ID do usuário dentro do request
+
     next(); // faz o middleware finalizar assim voltando para o chamador
   } catch { // serve para captar um erro
     throw new AppError("Token inválido", 401); // retornar este erro ao chamador

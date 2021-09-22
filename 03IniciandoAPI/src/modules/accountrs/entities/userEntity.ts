@@ -24,6 +24,9 @@ class UserEntity { // tipagem para o banco de dados
   @CreateDateColumn() // configuração especifica para uma coluna de registro de criação
   createdAt: Date;
 
+  @Column()
+  avatar: string;
+
   constructor() { // serve como uma função para criar algo
     if (!this.id) { // vai identificar se já existe um ID
       this.id = uuidV4(); // cria um ID
