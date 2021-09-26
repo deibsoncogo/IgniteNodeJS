@@ -1,5 +1,5 @@
 import { getRepository, Repository } from "typeorm";
-import { ICreateUserDTO } from "../../dtos/ICreateUserDto";
+import { ICreateUserDto } from "../../dtos/iCreateUserDto";
 import { UserEntity } from "../../entities/userEntity";
 import { IUserRepository } from "../iUserRepository";
 
@@ -12,7 +12,7 @@ class UserRepository implements IUserRepository { // implementes vincula a tipag
   }
 
   async create(
-    { name, email, password, driverLicense, avatar, id }: ICreateUserDTO,
+    { name, email, password, driverLicense, avatar, id }: ICreateUserDto,
   ): Promise<UserEntity> { // função que vai criar um usuário
     // prepara os dados antes de salvar
     const user = this.userRepository.create({ name, email, password, driverLicense, avatar, id });

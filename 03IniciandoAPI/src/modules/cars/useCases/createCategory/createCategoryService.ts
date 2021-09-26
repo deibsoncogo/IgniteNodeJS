@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
 import { AppError } from "../../../../errors/appError";
-import { ICreateCategoryDTO } from "../../dtos/iCreateRepositoryDto"; // importação da tipagem
+import { ICreateCategoryDto } from "../../dtos/iCreateCategoryDto"; // importação da tipagem
 import { CategoryEntity } from "../../entities/categoryEntity"; // importação da entidade de categoria
 import { ICategoryRepository } from "../../repositories/iCategoryRepository"; // importação do repositório de categoria
 
@@ -11,7 +11,7 @@ class CreateCategoryService { // grupo único e principal
     private categoryRepository: ICategoryRepository, // criar o acesso ao repositório
   ) {}
 
-  async execute({ name, description }: ICreateCategoryDTO): Promise<CategoryEntity> { // função única e principal
+  async execute({ name, description }: ICreateCategoryDto): Promise<CategoryEntity> { // função única e principal
     const categoryAlreadyExists = await this.categoryRepository.findByName(name); // chama a função
 
     if (categoryAlreadyExists) { // evita a duplicação do nome de categoria

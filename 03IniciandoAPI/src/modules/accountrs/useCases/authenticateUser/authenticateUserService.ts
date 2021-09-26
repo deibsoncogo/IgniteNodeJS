@@ -2,7 +2,7 @@ import { compare } from "bcryptjs"; // dependência sobre criptografia
 import { sign } from "jsonwebtoken"; // dependência sobre json token
 import { inject, injectable } from "tsyringe"; // dependência sobre injeção de repositório
 import { AppError } from "../../../../errors/appError";
-import { IAuthenticateUser } from "../../dtos/IAuthenticateUser";
+import { IAuthenticateUserDto } from "../../dtos/iAuthenticateUserDto";
 import { IUserRepository } from "../../repositories/iUserRepository";
 
 interface IResponse { // tipagem dos dados para o retorno
@@ -17,7 +17,7 @@ class AuthenticateUserService { // classe única
     private userRepository: IUserRepository, // criar o acesso ao repositório
   ) {}
 
-  async execute({ email, password }:IAuthenticateUser): Promise<IResponse> { // função principal
+  async execute({ email, password }:IAuthenticateUserDto): Promise<IResponse> { // função principal
     const user = await this.userRepository.findByEmail(email); // chama a função
 
     if (!user) { // vai barra se o email passado não existir no banco de dados

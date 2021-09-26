@@ -1,6 +1,6 @@
 import { getRepository, Repository } from "typeorm";
 import { SpecificationEntity } from "../../entities/specificationEntity";
-import { ISpecificationRepository, ISpecificationRepositoryDTO } from "../iSpecificationRepository";
+import { ISpecificationRepository, ISpecificationRepositoryDto } from "../iSpecificationRepository";
 
 class SpecificationRepository implements ISpecificationRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso
@@ -10,7 +10,7 @@ class SpecificationRepository implements ISpecificationRepository { // implement
     this.specificationRepository = getRepository(SpecificationEntity); // cria o acesso ao banco de dados com tipagem
   }
 
-  async create({ name, description }: ISpecificationRepositoryDTO): Promise<SpecificationEntity> {
+  async create({ name, description }: ISpecificationRepositoryDto): Promise<SpecificationEntity> {
     // prepara os dados antes de salvar
     const specification = this.specificationRepository.create({ name, description });
 

@@ -1,5 +1,5 @@
 import { getRepository, Repository } from "typeorm";
-import { ICreateCategoryDTO } from "../../dtos/iCreateRepositoryDto";
+import { ICreateCategoryDto } from "../../dtos/iCreateCategoryDto";
 import { CategoryEntity } from "../../entities/categoryEntity";
 import { ICategoryRepository } from "../iCategoryRepository";
 
@@ -11,7 +11,7 @@ class CategoryRepository implements ICategoryRepository { // implementes vincula
     this.categoryRepository = getRepository(CategoryEntity); // cria o acesso ao banco de dados com tipagem
   }
 
-  async create({ name, description }: ICreateCategoryDTO): Promise<CategoryEntity> { // função que vai criar uma categoria
+  async create({ name, description }: ICreateCategoryDto): Promise<CategoryEntity> { // função que vai criar uma categoria
     // prepara os dados antes de salvar
     const category = this.categoryRepository.create({ name, description });
 

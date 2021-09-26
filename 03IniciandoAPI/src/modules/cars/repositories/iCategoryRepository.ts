@@ -1,8 +1,8 @@
-import { ICreateCategoryDTO } from "../dtos/iCreateRepositoryDto"; // importa a tipagem
+import { ICreateCategoryDto } from "../dtos/iCreateCategoryDto"; // importa a tipagem
 import { CategoryEntity } from "../entities/categoryEntity"; // importa a entidade
 
 interface ICategoryRepository { // vai servir como um contrato mostrando as funções permitida
-  create({ name, description }: ICreateCategoryDTO): Promise<CategoryEntity>;
+  create({ name, description }: ICreateCategoryDto): Promise<CategoryEntity>;
   list(): Promise<CategoryEntity[]>; // define o nome da função e que não recebe nenhum dados e retornar CategoryEntity[]
   findByName(name: string): Promise<CategoryEntity>;
 }
