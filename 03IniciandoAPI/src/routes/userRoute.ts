@@ -1,6 +1,6 @@
 import { Router } from "express"; // importa a dependência sobre rota
 import multer from "multer";
-import { EnsureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticated";
+import { EnsureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticatedMiddleware";
 import { CreateUserController } from "../modules/accountrs/useCases/createUser/createUserController";
 import { UpdateUserAvatarController } from "../modules/accountrs/useCases/updateUserAvatar/updateUserAvatarController";
 import { UploadSetting } from "../settings/uploadSetting";

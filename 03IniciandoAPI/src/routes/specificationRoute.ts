@@ -1,5 +1,5 @@
 import { Router } from "express"; // importa a dependência sobre rota
-import { EnsureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticated";
+import { EnsureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticatedMiddleware";
 import { CreateSpecificationController } from "../modules/cars/useCases/createSpecification/createSpecificationController";
 
 const specificationRoute = Router(); // método que ajuda na programação
