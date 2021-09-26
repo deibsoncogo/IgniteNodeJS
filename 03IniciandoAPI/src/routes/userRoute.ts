@@ -1,13 +1,13 @@
 import { Router } from "express"; // importa a dependência sobre rota
 import multer from "multer";
-import { UploadConfig } from "../config/upload";
 import { EnsureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticated";
 import { CreateUserController } from "../modules/accountrs/useCases/createUser/createUserController";
 import { UpdateUserAvatarController } from "../modules/accountrs/useCases/updateUserAvatar/updateUserAvatarController";
+import { UploadSetting } from "../settings/uploadSetting";
 
 const userRoute = Router(); // método que ajuda na programação
 
-const uploadAvatar = multer(UploadConfig("./tmp/avatar")); // cria o upload para a foto do usuário
+const uploadAvatar = multer(UploadSetting("./tmp/avatar")); // cria o upload para a foto do usuário
 
 // realiza o instanciamento para assim executar o arquivo corretamente
 const createUserController = new CreateUserController();

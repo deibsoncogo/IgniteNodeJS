@@ -2,7 +2,7 @@ import crypto from "crypto"; // dependência nativa utilizada para criar criptog
 import multer from "multer"; // dependência para lidar com upload de arquivos
 import { resolve } from "path"; // dependência nativa para lidar com arquivos
 
-function UploadConfig(folder: string) { // função única
+function UploadSetting(folder: string) { // função única
   return { // retornar algo ao chamador
     storage: multer.diskStorage({ // chama a função
       destination: resolve(__dirname, "..", "..", folder), // joga o arquivo para a raiz do projeto
@@ -16,4 +16,4 @@ function UploadConfig(folder: string) { // função única
   };
 }
 
-export { UploadConfig }; // exporta para poder ser utilizado
+export { UploadSetting }; // exporta para poder ser utilizado
