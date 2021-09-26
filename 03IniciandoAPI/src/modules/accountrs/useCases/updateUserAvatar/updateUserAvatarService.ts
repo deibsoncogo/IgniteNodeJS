@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
+import { DeleteFileUtil } from "../../../../utils/deleteFileUtil";
 import { IUpdateUserAvatarDto } from "../../dtos/iUpdateUserAvatarDto"; // importação da tipagem
 import { UserEntity } from "../../entities/userEntity"; // importação da entidade
 import { IUserRepository } from "../../repositories/iUserRepository"; // importação do contrato do repositório
@@ -12,6 +13,10 @@ class UpdateUserAvatarService { // classe única
 
   async execute({ userId, avatarFile }: IUpdateUserAvatarDto): Promise<UserEntity> { // função principal
     const user = await this.userRepository.findById(userId); // chama a função
+
+    if (user.avatar) { // identifica se existe algum arquivo antes de chamar a função
+      await DeleteFileUtil(`./tmp/avatar/${user.avatar}`);
+    }
 
     user.avatar = avatarFile; // insere a foto no usuário vinculado ao bando de dados
 
