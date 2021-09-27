@@ -1,12 +1,8 @@
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
 import { AppError } from "../../../../errors/appError";
+import { ICreateSpecificationDto } from "../../dtos/iCreateSpecificationDto"; // importação da tipagem
 import { SpecificationEntity } from "../../entities/specificationEntity"; // importação da entidade de categoria
 import { ISpecificationRepository } from "../../repositories/iSpecificationRepository"; // importação do repositório de categoria
-
-interface IRequest { // tipagem dos itens a receber pelo request
-  name: string;
-  description: string;
-}
 
 @injectable() // para permite a injeção do TSyringe nesta classe
 class CreateSpecificationService { // grupo único e principal
@@ -15,7 +11,7 @@ class CreateSpecificationService { // grupo único e principal
     private specificationRepository: ISpecificationRepository, // criar o acesso ao repositório
   ) {}
 
-  async execute({ name, description }: IRequest): Promise<SpecificationEntity> { // função única e principal
+  async execute({ name, description }: ICreateSpecificationDto): Promise<SpecificationEntity> { // função única e principal
     const specificationAlreadyExists = await this.specificationRepository.findByName(name); // chama a função
 
     if (specificationAlreadyExists) { // evita a duplicação do nome de categoria

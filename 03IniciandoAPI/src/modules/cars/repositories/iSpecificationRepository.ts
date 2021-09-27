@@ -1,16 +1,12 @@
+import { ICreateSpecificationDto } from "../dtos/iCreateSpecificationDto";
 import { SpecificationEntity } from "../entities/specificationEntity";
 
-interface ISpecificationRepositoryDto {
-  name: string;
-  description: string;
-}
-
 interface ISpecificationRepository {
-  create({ name, description }: ISpecificationRepositoryDto): Promise<SpecificationEntity>;
+  create({ name, description }: ICreateSpecificationDto): Promise<SpecificationEntity>;
   findByName(name: string): Promise<SpecificationEntity>;
 }
 
-export { ISpecificationRepository, ISpecificationRepositoryDto };
+export { ISpecificationRepository };
 
 /** Princípio da substituição de Liskov
  * Este arquivo vai servir como um contrato
