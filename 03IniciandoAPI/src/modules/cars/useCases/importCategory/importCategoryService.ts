@@ -1,6 +1,7 @@
 import csvParse from "csv-parse"; // dependencia que lida com arquivo csv
 import fs from "fs"; // dependencia nativa para lidar com arquivos
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
+import { AppError } from "../../../../errors/appError";
 import { CategoryEntity } from "../../entities/categoryEntity";
 import { ICategoryRepository } from "../../repositories/iCategoryRepository";
 
@@ -44,33 +45,26 @@ class ImportCategoryService { // grupo único e principal
   }
 
   // função principal que vai gerenciar todo o service
-  async execute(file: Express.Multer.File): Promise<CategoryEntity[] | undefined> {
-    console.log("Service - Inicio");
-
+  async execute(file: Express.Multer.File): Promise<CategoryEntity[]> {
     const categoriesExecuteImport = await this.loadCategory(file); // chama a função
 
     const categorySaved: CategoryEntity[] = []; // para retornar oque foi salvo
 
-    // para lidar com os dados para assim conseguir salvar individualmente
-    categoriesExecuteImport.map(async (category) => {
-      console.log("Service - Map inicio");
+    for (const category of categoriesExecuteImport) { // para lidar com os dados individualmente
       const { name, description } = category; // recebe os dados desestruturado
 
       const categoryAlreadyExists = await this.categoryRepository.findByName(name); // chama a função
 
       if (!categoryAlreadyExists) { // identifica se ja existe alguma categoria com este nome
-        const categorySavedAn = await this.categoryRepository.create({ name, description }); // chama a função
+        const categoryCreate = await this.categoryRepository.create({ name, description }); // chama a função
 
-        console.log("Antes do push", categorySavedAn);
-
-        categorySaved.push(categorySavedAn); // salva a categoria criada para poder retornar algo ao chamador
-
-        console.log("Depois do push", categorySaved);
+        categorySaved.push(categoryCreate); // salva no array para depois retornar ao chamador
       }
-      console.log("Service - Map final");
-    });
+    }
 
-    console.log("Service - Final", categorySaved);
+    if (categorySaved.length === 0) { // identifica se uma categoria foi criada
+      throw new AppError("Nenhuma categoria foi criada", 200);
+    }
 
     return categorySaved; // retorna algo ao chamador
   }
