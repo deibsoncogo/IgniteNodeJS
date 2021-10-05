@@ -1,8 +1,8 @@
 import "reflect-metadata"; // importa a dependencia necessária para o tsyringe funcionar
 import { AppError } from "../../../../src/errors/appError"; // importa o arquivo gerenciador de erros
-import { ICreateUserDto } from "../../../../src/modules/accountrs/dtos/iCreateUserDto"; // importa a tipagem de criação do usuário DTO
-import { AuthenticateUserService } from "../../../../src/modules/accountrs/useCases/authenticateUser/authenticateUserService"; // importa o serviço de autenticação
-import { CreateUserService } from "../../../../src/modules/accountrs/useCases/createUser/createUserService"; // importa o serviço do usuário
+import { ICreateUserDto } from "../../../../src/modules/accounts/dtos/iCreateUserDto"; // importa a tipagem de criação do usuário DTO
+import { AuthenticateUserService } from "../../../../src/modules/accounts/useCases/authenticateUser/authenticateUserService"; // importa o serviço de autenticação
+import { CreateUserService } from "../../../../src/modules/accounts/useCases/createUser/createUserService"; // importa o serviço do usuário
 import { UserRepositoryInMemory } from "../repositories/userRepositoryInMemory"; // importa o repositório volatil
 
 let authenticateUserService: AuthenticateUserService; // cria a variavel para o serviço

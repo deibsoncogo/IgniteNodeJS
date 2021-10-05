@@ -1,6 +1,6 @@
-import { ICreateUserDto } from "../../../../src/modules/accountrs/dtos/iCreateUserDto"; // importação das tipagens de DTO
-import { UserEntity } from "../../../../src/modules/accountrs/entities/userEntity"; // importação das entidades
-import { IUserRepository } from "../../../../src/modules/accountrs/repositories/iUserRepository"; // importação do contrato do repositório
+import { ICreateUserDto } from "../../../../src/modules/accounts/dtos/iCreateUserDto"; // importação das tipagens de DTO
+import { UserEntity } from "../../../../src/modules/accounts/entities/userEntity"; // importação das entidades
+import { IUserRepository } from "../../../../src/modules/accounts/repositories/iUserRepository"; // importação do contrato do repositório
 
 class UserRepositoryInMemory implements IUserRepository { // classe principal
   users: UserEntity[] = []; // banco de dados volatil

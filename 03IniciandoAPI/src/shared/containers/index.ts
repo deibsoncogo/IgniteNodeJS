@@ -1,6 +1,6 @@
 import { container } from "tsyringe"; // importando os itens que iremos usar
-import { UserRepository } from "@accountrs/repositories/implementations/userRepository";
-import { IUserRepository } from "@accountrs/repositories/iUserRepository";
+import { UserRepository } from "@accounts/repositories/implementations/userRepository";
+import { IUserRepository } from "@accounts/repositories/iUserRepository";
 import { ICategoryRepository } from "@cars/repositories/iCategoryRepository";
 import { CategoryRepository } from "@cars/repositories/implementations/categoryRepository";
 import { SpecificationRepository } from "@cars/repositories/implementations/specificationRepository";

@@ -1,7 +1,7 @@
 import { Router } from "express"; // framework principal que neste caso vai lidar com as rotas
 import multer from "multer"; // dependencia para lidar com importação de arquivos
-import { CreateUserController } from "@accountrs/useCases/createUser/createUserController";
-import { UpdateUserAvatarController } from "@accountrs/useCases/updateUserAvatar/updateUserAvatarController";
+import { CreateUserController } from "@accounts/useCases/createUser/createUserController";
+import { UpdateUserAvatarController } from "@accounts/useCases/updateUserAvatar/updateUserAvatarController";
 import { EnsureAuthenticatedMiddleware } from "@middlewares/ensureAuthenticatedMiddleware";
 import { UploadSetting } from "@settings/uploadSetting";
 
