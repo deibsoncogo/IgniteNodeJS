@@ -17,6 +17,7 @@
     "eslint-plugin-import-helpers"
   ],
   "rules": {
+    "import/order": "off",
     "no-await-in-loop": "off",
     "no-restricted-syntax": "off",
     "no-useless-constructor": "off",
@@ -34,7 +35,7 @@
         "groups": [
           ["/react/", "/next/", "/express/", "/typeorm/"],
           "module",
-          ["parent", "sibling", "index"], ["/style/", "/css/"]
+          ["parent", "sibling", "index", "/^@/"], ["/style/", "/css/"]
         ],
         "newlinesBetween": "never",
         "alphabetize": { "order": "asc", "ignoreCase": true }

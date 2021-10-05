@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express"; // framework muito importante para nossa aplicação
 import { verify } from "jsonwebtoken"; // dependência sobre token json
-import { AppError } from "../errors/appError";
-import { UserRepository } from "../modules/accountrs/repositories/implementations/userRepository";
+import { UserRepository } from "@accountrs/repositories/implementations/userRepository";
+import { AppError } from "@errors/appError";
 
 interface IToken { // tipagem do token
   // iat?: number; // interrogação torna a tipagem opcional

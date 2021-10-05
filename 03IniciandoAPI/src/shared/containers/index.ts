@@ -1,10 +1,10 @@
 import { container } from "tsyringe"; // importando os itens que iremos usar
-import { UserRepository } from "../../modules/accountrs/repositories/implementations/userRepository";
-import { IUserRepository } from "../../modules/accountrs/repositories/iUserRepository";
-import { ICategoryRepository } from "../../modules/cars/repositories/iCategoryRepository";
-import { CategoryRepository } from "../../modules/cars/repositories/implementations/categoryRepository";
-import { SpecificationRepository } from "../../modules/cars/repositories/implementations/specificationRepository";
-import { ISpecificationRepository } from "../../modules/cars/repositories/iSpecificationRepository";
+import { UserRepository } from "@accountrs/repositories/implementations/userRepository";
+import { IUserRepository } from "@accountrs/repositories/iUserRepository";
+import { ICategoryRepository } from "@cars/repositories/iCategoryRepository";
+import { CategoryRepository } from "@cars/repositories/implementations/categoryRepository";
+import { SpecificationRepository } from "@cars/repositories/implementations/specificationRepository";
+import { ISpecificationRepository } from "@cars/repositories/iSpecificationRepository";
 
 // cria os instanciamentos automaticamente sobre as categorias
 container.registerSingleton<ICategoryRepository>(

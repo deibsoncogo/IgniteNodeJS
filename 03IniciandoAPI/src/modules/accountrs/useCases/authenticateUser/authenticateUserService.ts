@@ -1,9 +1,9 @@
 import { compare } from "bcryptjs"; // dependência sobre criptografia
 import { sign } from "jsonwebtoken"; // dependência sobre json token
 import { inject, injectable } from "tsyringe"; // dependência sobre injeção de repositório
-import { AppError } from "../../../../errors/appError";
 import { IAuthenticateUserDto } from "../../dtos/iAuthenticateUserDto";
 import { IUserRepository } from "../../repositories/iUserRepository";
+import { AppError } from "@errors/appError";
 
 interface IResponse { // tipagem dos dados para o retorno
   userReturn: { name: string, email: string },

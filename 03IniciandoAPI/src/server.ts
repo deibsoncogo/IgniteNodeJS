@@ -1,12 +1,12 @@
 import "reflect-metadata"; // esta dependência deve ser o primeiro de tudo
 import "./database"; // o item importado vai funcionar em toda a aplicação
 import "./shared/containers"; // vai disponibilizar o TSyringe para toda a aplicação
-import express, { Request, Response, NextFunction } from "express"; // realiza a importação da dependência
+import express, { Request, Response, NextFunction } from "express"; // realiza a importação do framework
 import "express-async-errors"; // dependência que vai lidar com os erros na aplicação
 import swaggerUi from "swagger-ui-express"; // importa o arquivo index de rota
-import { AppError } from "./errors/appError";
 import { router } from "./routes"; // define o formato dos dados utilizado no request e response
 import swaggerFile from "./swagger.json"; // dependencia que serve para criar uma documentação
+import { AppError } from "@errors/appError";
 
 const app = express(); // método para facilitar o uso
 

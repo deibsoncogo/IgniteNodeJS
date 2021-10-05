@@ -1,9 +1,9 @@
 import { hash } from "bcryptjs"; // dependência que realizar criptografia dos dados
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
-import { AppError } from "../../../../errors/appError";
 import { ICreateUserDto } from "../../dtos/iCreateUserDto"; // importação da tipagem
 import { UserEntity } from "../../entities/userEntity"; // importação da entidade
 import { IUserRepository } from "../../repositories/iUserRepository"; // importação do contrato do repositório
+import { AppError } from "@errors/appError";
 
 @injectable() // para permite a injeção do TSyringe nesta classe
 class CreateUserService { // grupo único e principal

@@ -1,5 +1,5 @@
 import { Router } from "express"; // importa a dependência sobre rota
-import { AuthenticateUserController } from "../modules/accountrs/useCases/authenticateUser/authenticateUserController";
+import { AuthenticateUserController } from "@accountrs/useCases/authenticateUser/authenticateUserController";
 
 const authenticateRoute = Router(); // método que ajuda na programação
 

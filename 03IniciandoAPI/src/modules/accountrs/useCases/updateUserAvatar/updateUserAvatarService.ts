@@ -1,8 +1,8 @@
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
-import { DeleteFileUtil } from "../../../../utils/deleteFileUtil";
 import { IUpdateUserAvatarDto } from "../../dtos/iUpdateUserAvatarDto"; // importação da tipagem
 import { UserEntity } from "../../entities/userEntity"; // importação da entidade
 import { IUserRepository } from "../../repositories/iUserRepository"; // importação do contrato do repositório
+import { DeleteFileUtil } from "@utils/deleteFileUtil";
 
 @injectable() // para permite a injeção do TSyringe nesta classe
 class UpdateUserAvatarService { // classe única
