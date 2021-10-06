@@ -1,5 +1,5 @@
 import { ICreateUserDto } from "../dtos/iCreateUserDto"; // importando a tipagem
-import { UserEntity } from "../entities/userEntity"; // importando a entidade
+import { UserEntity } from "../infra/typeorm/entities/userEntity"; // importando a entidade
 
 interface IUserRepository { // vai servir como um contrato mostrando as funções permitida
   create({ name, email, password, driverLicense }: ICreateUserDto): Promise<UserEntity>;

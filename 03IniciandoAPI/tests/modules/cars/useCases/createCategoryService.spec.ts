@@ -1,7 +1,7 @@
 import "reflect-metadata"; // importa a dependencia necessária para o tsyringe funcionar
-import { AppError } from "../../../../src/errors/appError"; // importa o arquivo gerenciador de erros
-import { CreateCategoryService } from "../../../../src/modules/cars/useCases/createCategory/createCategoryService"; // importa o servico de criação de categoria
-import { CategoryRepositoryInMemory } from "../repositories/categoryRepositoryInMemory"; // importa o repositório volatil
+import { CategoryRepositoryInMemory } from "../repositories/categoryRepositoryInMemory";
+import { CreateCategoryService } from "@cars/useCases/createCategory/createCategoryService";
+import { AppError } from "@errors/appError";
 
 let createCategoryService: CreateCategoryService; // cria a variavel para o serviço de categoria
 let categoryRepositoryInMemory: CategoryRepositoryInMemory; // cria a variavel para o repositório de categoria

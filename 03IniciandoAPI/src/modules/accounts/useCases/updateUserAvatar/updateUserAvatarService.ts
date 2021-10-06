@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
 import { IUpdateUserAvatarDto } from "../../dtos/iUpdateUserAvatarDto"; // importação da tipagem
-import { UserEntity } from "../../entities/userEntity"; // importação da entidade
+import { UserEntity } from "../../infra/typeorm/entities/userEntity"; // importação da entidade
 import { IUserRepository } from "../../repositories/iUserRepository"; // importação do contrato do repositório
 import { DeleteFileUtil } from "@utils/deleteFileUtil";
 

@@ -1,5 +1,5 @@
 import { ICreateCategoryDto } from "../dtos/iCreateCategoryDto"; // importa a tipagem
-import { CategoryEntity } from "../entities/categoryEntity"; // importa a entidade
+import { CategoryEntity } from "../infra/typeorm/entities/categoryEntity"; // importa a entidade
 
 interface ICategoryRepository { // vai servir como um contrato mostrando as funções permitida
   create({ name, description }: ICreateCategoryDto): Promise<CategoryEntity>;

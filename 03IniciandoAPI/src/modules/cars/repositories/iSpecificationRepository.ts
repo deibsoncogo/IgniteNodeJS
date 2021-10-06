@@ -1,5 +1,5 @@
 import { ICreateSpecificationDto } from "../dtos/iCreateSpecificationDto";
-import { SpecificationEntity } from "../entities/specificationEntity";
+import { SpecificationEntity } from "../infra/typeorm/entities/specificationEntity";
 
 interface ISpecificationRepository {
   create({ name, description }: ICreateSpecificationDto): Promise<SpecificationEntity>;

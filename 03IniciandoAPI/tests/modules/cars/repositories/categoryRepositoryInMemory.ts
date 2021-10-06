@@ -1,6 +1,6 @@
-import { ICreateCategoryDto } from "../../../../src/modules/cars/dtos/iCreateCategoryDto"; // importação das tipagens de DTO
-import { CategoryEntity } from "../../../../src/modules/cars/entities/categoryEntity"; // importação das entidades
-import { ICategoryRepository } from "../../../../src/modules/cars/repositories/iCategoryRepository"; // importação do contrato do repositório
+import { ICreateCategoryDto } from "@cars/dtos/iCreateCategoryDto";
+import { CategoryEntity } from "@cars/infra/typeorm/entities/categoryEntity";
+import { ICategoryRepository } from "@cars/repositories/iCategoryRepository";
 
 class CategoryRepositoryInMemory implements ICategoryRepository { // classe principal
   categories: CategoryEntity[] = []; // banco de dados volatil

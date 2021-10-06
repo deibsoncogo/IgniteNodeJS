@@ -1,7 +1,7 @@
 import csvParse from "csv-parse"; // dependencia que lida com arquivo csv
 import fs from "fs"; // dependencia nativa para lidar com arquivos
 import { inject, injectable } from "tsyringe"; // dependência que realiza injeção dos arquivos
-import { CategoryEntity } from "../../entities/categoryEntity";
+import { CategoryEntity } from "../../infra/typeorm/entities/categoryEntity";
 import { ICategoryRepository } from "../../repositories/iCategoryRepository";
 import { AppError } from "@errors/appError";
 
