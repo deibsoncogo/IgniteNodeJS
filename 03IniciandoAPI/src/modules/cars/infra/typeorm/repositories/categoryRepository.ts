@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm";
-import { ICreateCategoryDto } from "../../dtos/iCreateCategoryDto";
-import { CategoryEntity } from "../../entities/categoryEntity";
-import { ICategoryRepository } from "../iCategoryRepository";
+import { ICreateCategoryDto } from "@cars/dtos/iCreateCategoryDto";
+import { CategoryEntity } from "@cars/infra/typeorm/entities/categoryEntity";
+import { ICategoryRepository } from "@cars/repositories/iCategoryRepository";
 
 class CategoryRepository implements ICategoryRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso

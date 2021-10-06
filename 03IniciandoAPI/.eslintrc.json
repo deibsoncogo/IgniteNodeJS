@@ -34,7 +34,7 @@
     "import-helpers/order-imports": [ // ordena importações
       "warn", {
         "groups": [
-          ["/react/", "/next/", "/express/", "/typeorm/"],
+          ["/^react/", "/^next/", "/^express/", "/^typeorm/"],
           "module",
           ["parent", "sibling", "index", "/^@/"], ["/style/", "/css/"]
         ],

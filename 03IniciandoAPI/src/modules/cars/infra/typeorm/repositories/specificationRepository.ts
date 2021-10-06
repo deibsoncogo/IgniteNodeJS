@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm";
-import { ICreateSpecificationDto } from "../../dtos/iCreateSpecificationDto";
-import { SpecificationEntity } from "../../entities/specificationEntity";
-import { ISpecificationRepository } from "../iSpecificationRepository";
+import { ICreateSpecificationDto } from "@cars/dtos/iCreateSpecificationDto";
+import { SpecificationEntity } from "@cars/infra/typeorm/entities/specificationEntity";
+import { ISpecificationRepository } from "@cars/repositories/iSpecificationRepository";
 
 class SpecificationRepository implements ISpecificationRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso

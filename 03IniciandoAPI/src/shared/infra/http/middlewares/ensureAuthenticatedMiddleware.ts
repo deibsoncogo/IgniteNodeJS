@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express"; // framework muito importante para nossa aplicação
 import { verify } from "jsonwebtoken"; // dependência sobre token json
-import { UserRepository } from "@accounts/repositories/implementations/userRepository";
+import { UserRepository } from "@accounts/infra/typeorm/repositories/userRepository";
 import { AppError } from "@errors/appError";
 
 interface IToken { // tipagem do token

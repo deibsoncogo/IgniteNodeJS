@@ -7,7 +7,7 @@
   "author": "Deibson Cogo <deibsoncogo@outlook.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --respawn --ignore-watch node_modules src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev r tsconfig-paths/register ./node_modules/typeorm/cli",
     "test": "jest"
   },

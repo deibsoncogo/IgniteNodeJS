@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm";
-import { ICreateUserDto } from "../../dtos/iCreateUserDto";
-import { UserEntity } from "../../entities/userEntity";
-import { IUserRepository } from "../iUserRepository";
+import { ICreateUserDto } from "@accounts/dtos/iCreateUserDto";
+import { UserEntity } from "@accounts/infra/typeorm/entities/userEntity";
+import { IUserRepository } from "@accounts/repositories/iUserRepository";
 
 class UserRepository implements IUserRepository { // implementes vincula a tipagem
   // devemos trocar const por private para somente este arquivo ter acesso

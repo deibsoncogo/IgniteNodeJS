@@ -5,13 +5,15 @@
     "rootDir": "./",
     "baseUrl": "./src",
     "paths": {
-      "@errors/*": ["errors/*"],
-      "@middlewares/*": ["middlewares/*"],
       "@settings/*": ["settings/*"],
-      "@shared/*": ["shared/*"],
       "@utils/*": ["utils/*"],
+      "@modules/*": ["modules/*"],
       "@accounts/*": ["modules/accounts/*"],
-      "@cars/*": ["modules/cars/*"]
+      "@cars/*": ["modules/cars/*"],
+      "@shared/*": ["shared/*"],
+      "@errors/*": ["shared/infra/http/errors/*"],
+      "@middlewares/*": ["shared/infra/http/middlewares/*"],
+      "@typeorm/*": ["shared/infra/typeorm/*"]
     },
     "esModuleInterop": true,
     "experimentalDecorators": true,

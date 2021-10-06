@@ -1,9 +1,9 @@
 import { container } from "tsyringe"; // importando os itens que iremos usar
-import { UserRepository } from "@accounts/repositories/implementations/userRepository";
+import { UserRepository } from "@accounts/infra/typeorm/repositories/userRepository";
 import { IUserRepository } from "@accounts/repositories/iUserRepository";
+import { CategoryRepository } from "@cars/infra/typeorm/repositories/categoryRepository";
+import { SpecificationRepository } from "@cars/infra/typeorm/repositories/specificationRepository";
 import { ICategoryRepository } from "@cars/repositories/iCategoryRepository";
-import { CategoryRepository } from "@cars/repositories/implementations/categoryRepository";
-import { SpecificationRepository } from "@cars/repositories/implementations/specificationRepository";
 import { ISpecificationRepository } from "@cars/repositories/iSpecificationRepository";
 
 // cria os instanciamentos automaticamente sobre as categorias
