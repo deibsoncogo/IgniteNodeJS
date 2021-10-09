@@ -30,6 +30,7 @@ class UserEntity { // tipagem para o banco de dados
   constructor() { // serve como uma função para criar algo
     if (!this.id) { // vai identificar se já existe um ID
       this.id = uuidV4(); // cria um ID
+      this.isAdmin = false; // cria o campo com este valor
     }
   }
 }

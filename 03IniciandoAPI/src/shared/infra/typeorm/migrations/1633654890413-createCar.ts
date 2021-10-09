@@ -26,7 +26,7 @@ export class createCar1633654890413 implements MigrationInterface { // classe ú
           {
             name: "available",
             type: "boolean", // define o tipo de dados verdadeiro ou falso para salvar
-            default: true,
+            default: true, // define um valor a ser atribuido na criação
           },
           {
             name: "licensePlate",
