@@ -26,6 +26,7 @@
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "class-methods-use-this": "off",
     "arrow-body-style": "off",
+    "no-plusplus": "off",
     "max-len": ["error", {"code": 103, "ignoreComments": true, "ignoreUrls": true, "ignorePattern": "^import\\s.+\\sfrom\\s.+;$" }], // tamanho máximo da linha
     "linebreak-style": "off", // tipo de enter
     "no-console": "off", // console
