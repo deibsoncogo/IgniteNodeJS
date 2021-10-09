@@ -17,6 +17,12 @@ class CarRepositoryImMemory implements ICarRepository { // criando uma classe
 
     return car; // retorna algo ao chamador
   }
+
+  async findByLicensePlate(licensePlate: string): Promise<CarEntity> { // criando uma função
+    const carFind = this.cars.find((car) => car.licensePlate === licensePlate); // chama a função de busca
+
+    return carFind; // retorna algo algo chamador
+  }
 }
 
 export { CarRepositoryImMemory }; // exporta para poder ser utilizado

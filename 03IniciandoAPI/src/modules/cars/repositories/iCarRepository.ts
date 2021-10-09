@@ -5,6 +5,7 @@ interface ICarRepository {
   create(
     { name, description, dailyRate, licensePlate, fineAmount, brand, categoryId }: ICreateCarDto
   ): Promise<CarEntity>;
+  findByLicensePlate(licensePlate: string): Promise<CarEntity>;
 }
 
 export { ICarRepository }; // exporta para poder ser chamado
