@@ -1,22 +1,25 @@
-import { container } from "tsyringe"; // importando os itens que iremos usar
+import { container } from "tsyringe"; // dependencia que vai realizar os instanciamentos automaticamente
 import { UserRepository } from "@accounts/infra/typeorm/repositories/userRepository";
 import { IUserRepository } from "@accounts/repositories/iUserRepository";
 import { CategoryRepository } from "@cars/infra/typeorm/repositories/categoryRepository";
 import { SpecificationRepository } from "@cars/infra/typeorm/repositories/specificationRepository";
 import { ICategoryRepository } from "@cars/repositories/iCategoryRepository";
 import { ISpecificationRepository } from "@cars/repositories/iSpecificationRepository";
+import { CarRepository } from "@modules/cars/infra/typeorm/repositories/carRepository";
+import { ICarRepository } from "@modules/cars/repositories/iCarRepository";
 
-// cria os instanciamentos automaticamente sobre as categorias
-container.registerSingleton<ICategoryRepository>(
+container.registerSingleton<ICategoryRepository>( // cria os instanciamentos automaticamente
   "CategoryRepository", CategoryRepository, // primeiro definimos um nome e depois o repositorio
 );
 
-// cria os instanciamentos automaticamente sobre as especificações
-container.registerSingleton<ISpecificationRepository>(
-  "SpecificationRepository", SpecificationRepository,
+container.registerSingleton<ISpecificationRepository>( // cria os instanciamentos automaticamente
+  "SpecificationRepository", SpecificationRepository, // primeiro definimos um nome e depois o repositorio
 );
 
-// cria os instanciamentos automaticamente sobre os usuários
-container.registerSingleton<IUserRepository>(
-  "UserRepository", UserRepository,
+container.registerSingleton<IUserRepository>( // cria os instanciamentos automaticamente
+  "UserRepository", UserRepository, // primeiro definimos um nome e depois o repositorio
+);
+
+container.registerSingleton<ICarRepository>( // cria os instanciamentos automaticamente
+  "CarRepository", CarRepository, // primeiro definimos um nome e depois o repositorio
 );
