@@ -1,5 +1,5 @@
-import { Router } from "express"; // framework principal que neste caso vai lidar com as rotas
-import multer from "multer"; // dependencia para lidar com importação de arquivos
+import { Router } from "express"; // importação que vai lidar com as rotas
+import multer from "multer"; // dependencia que vai lidar com importações de arquivos
 import { CreateUserController } from "@accounts/useCases/createUser/createUserController";
 import { UpdateUserAvatarController } from "@accounts/useCases/updateUserAvatar/updateUserAvatarController";
 import { EnsureAuthenticatedMiddleware } from "@middlewares/ensureAuthenticatedMiddleware";
@@ -15,11 +15,7 @@ const updateUserAvatarController = new UpdateUserAvatarController();
 
 userRoute.post("/", createUserController.execute); // cria um usuário
 
-userRoute.patch( // cria uma foto de usuário
-  "/avatar", // caminho da rota
-  EnsureAuthenticatedMiddleware, // chama o função que realiza a identificação de autorização
-  uploadAvatar.single("avatar"), // chama a função para lidar com a importação
-  updateUserAvatarController.execute, // cham os arquivos da rota
-);
+userRoute.use(EnsureAuthenticatedMiddleware); // aplicação de alguns middleware
+userRoute.patch("/avatar", uploadAvatar.single("avatar"), updateUserAvatarController.execute); // cria uma foto para o usuário
 
 export { userRoute }; // exporta para poder ser chamado

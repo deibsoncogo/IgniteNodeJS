@@ -30,6 +30,8 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
 
   // se for um erro inesperado usamos esta formatação para dar a tratativa
   return response.status(500).json({ message: `Erro interno do servidor - ${err.message}` }); // retornar algo ao chamador
+
+  next(); // encerra o middleware voltando para o chamador
 });
 
 // define a porta de execução do servidor

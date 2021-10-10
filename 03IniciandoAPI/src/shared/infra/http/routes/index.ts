@@ -1,4 +1,4 @@
-import { Router } from "express"; // iremos usar o router para lidar com as rotas
+import { Router } from "express"; // importação que vai lidar com as rotas
 import { authenticateRoute } from "./authenticateRoute";
 import { carRoute } from "./carRoute";
 import { categoryRoute } from "./categoryRoute";

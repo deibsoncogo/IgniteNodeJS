@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express"; // framework muito importante para nossa aplicação
-import { verify } from "jsonwebtoken"; // dependência sobre token json
+import { Request, Response, NextFunction } from "express"; // importação para lidar com o recebimento e envio de informação
+import { verify } from "jsonwebtoken"; // dependência para lidar com token json
 import { UserRepository } from "@accounts/infra/typeorm/repositories/userRepository";
 import { AppError } from "@errors/appError";
 
@@ -9,9 +9,10 @@ interface IToken { // tipagem do token
   sub: string; // define a tipagem no formato de texto
 }
 
-async function EnsureAuthenticatedMiddleware( // função unica que será nosso middleware
+// função que servira como um middleware para identificar se existe um usuário logado
+async function EnsureAuthenticatedMiddleware(
   request: Request, response: Response, next: NextFunction,
-) {
+): Promise<void> {
   const authHeader = request.headers.authorization; // recebe os dados pelo cabeçalho no campo padrão de autorização
 
   if (!authHeader) { // vai barrar se não receber o token
@@ -36,7 +37,7 @@ async function EnsureAuthenticatedMiddleware( // função unica que será nosso 
 
     request.userId = userId; // insere o ID do usuário dentro do request
 
-    next(); // faz o middleware finalizar assim voltando para o chamador
+    next(); // encerra o middleware voltando para o chamador
   } catch { // serve para captar um erro
     throw new AppError("Token inválido", 401); // retornar este erro ao chamador
   }
