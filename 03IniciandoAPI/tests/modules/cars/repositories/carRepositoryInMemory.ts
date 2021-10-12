@@ -34,9 +34,9 @@ class CarRepositoryImMemory implements ICarRepository {
   ): Promise<CarEntity[]> {
     const carFilterAvailableTrue = this.cars.filter((car) => { // chama o método que vai realizar uma filtra nas informações
       if (car.available === true
-        || ((name && car.name === name)
-        || (brand && car.brand === brand)
-        || (categoryId && car.categoryId === categoryId))
+        && (name ? car.name === name : true)
+        && (brand ? car.brand === brand : true)
+        && (categoryId ? car.categoryId === categoryId : true)
       ) { // regras que definem quando retornar as informações do carro
         return car; // retorna as informações do carro
       }

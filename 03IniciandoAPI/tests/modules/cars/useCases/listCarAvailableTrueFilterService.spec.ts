@@ -11,7 +11,6 @@ describe("Listagem de carros", () => { // cria um grupo de testes
     listCarAvailableTrueFilterService = new ListCarAvailableTrueFilterService(carRepositoryImMemory); // instancia para criar o acesso ao serviço de listagem de carros vinculado com o repositório de carro
   });
 
-  // O TESTE AINDA NÃO ESTÁ VERIFICANDO SE ESTÁ RETORNANDO SOMENTE OS CARROS DISPONIVEIS
   it("Deve ser possivel listar todos os carros disponiveis", async () => { // cria um teste
     const car1 = await carRepositoryImMemory.create({ // chama a função de cadastro de carro
       name: "Nome teste 1",
@@ -22,6 +21,18 @@ describe("Listagem de carros", () => { // cria um grupo de testes
       brand: "Marca teste 1",
       categoryId: "Categoria ID teste 1",
     });
+
+    await carRepositoryImMemory.create({ // chama a função de cadastro de carro
+      name: "Nome teste 2",
+      description: "Descrição teste 2",
+      dailyRate: 21,
+      licensePlate: "PLA-2T11",
+      fineAmount: 22,
+      brand: "Marca teste 2",
+      categoryId: "Categoria ID teste 2",
+    });
+
+    carRepositoryImMemory.cars[1].available = false; // alterando a disponibilidade do carro 2
 
     // chama a função de listagem de carro
     const carValidAll = await listCarAvailableTrueFilterService.execute({});
@@ -49,6 +60,18 @@ describe("Listagem de carros", () => { // cria um grupo de testes
       brand: "Marca teste 4",
       categoryId: "Categoria ID teste 4",
     });
+
+    await carRepositoryImMemory.create({ // chama a função de cadastro de carro
+      name: "Nome teste 2",
+      description: "Descrição teste 2",
+      dailyRate: 21,
+      licensePlate: "PLA-2T11",
+      fineAmount: 22,
+      brand: "Marca teste 2",
+      categoryId: "Categoria ID teste 2",
+    });
+
+    carRepositoryImMemory.cars[1].available = false; // alterando a disponibilidade do carro 2
 
     // chama a função de listagem de carro com a filtragem por nome
     const carValidName = await listCarAvailableTrueFilterService.execute(
@@ -79,6 +102,18 @@ describe("Listagem de carros", () => { // cria um grupo de testes
       categoryId: "Categoria ID teste 6",
     });
 
+    await carRepositoryImMemory.create({ // chama a função de cadastro de carro
+      name: "Nome teste 2",
+      description: "Descrição teste 2",
+      dailyRate: 21,
+      licensePlate: "PLA-2T11",
+      fineAmount: 22,
+      brand: "Marca teste 2",
+      categoryId: "Categoria ID teste 2",
+    });
+
+    carRepositoryImMemory.cars[1].available = false; // alterando a disponibilidade do carro 2
+
     // chama a função de listagem de carro com a filtragem pela marca
     const carValidBrand = await listCarAvailableTrueFilterService.execute(
       { brand: "Marca teste 5" },
@@ -107,6 +142,18 @@ describe("Listagem de carros", () => { // cria um grupo de testes
       brand: "Marca teste 8",
       categoryId: "Categoria ID teste 8",
     });
+
+    await carRepositoryImMemory.create({ // chama a função de cadastro de carro
+      name: "Nome teste 2",
+      description: "Descrição teste 2",
+      dailyRate: 21,
+      licensePlate: "PLA-2T11",
+      fineAmount: 22,
+      brand: "Marca teste 2",
+      categoryId: "Categoria ID teste 2",
+    });
+
+    carRepositoryImMemory.cars[1].available = false; // alterando a disponibilidade do carro 2
 
     // chama a função de listagem de carro com a filtragem pela categoria
     const carValidCategoryId = await listCarAvailableTrueFilterService.execute(
