@@ -1,5 +1,5 @@
 import { ICreateCarDto } from "@modules/cars/dtos/iCreateCarDto";
-import { IListCarDto } from "@modules/cars/dtos/iListCarDto";
+import { IListCarAvailableTrueFilterDto } from "@modules/cars/dtos/iListCarAvailableTrueFilterDto";
 import { CarEntity } from "@modules/cars/infra/typeorm/entities/carEntity";
 import { ICarRepository } from "@modules/cars/repositories/iCarRepository";
 
@@ -29,7 +29,9 @@ class CarRepositoryImMemory implements ICarRepository {
   }
 
   // função que vai listar os carros disponivel com filtragem extra opcional
-  async findAvailableTrueFilter({ name, brand, categoryId }: IListCarDto): Promise<CarEntity[]> {
+  async findAvailableTrueFilter(
+    { name, brand, categoryId }: IListCarAvailableTrueFilterDto,
+  ): Promise<CarEntity[]> {
     const carFilterAvailableTrue = this.cars.filter((car) => { // chama o método que vai realizar uma filtra nas informações
       if (car.available === true
         || ((name && car.name === name)

@@ -1,7 +1,7 @@
 import { getRepository, Repository } from "typeorm"; // dependencia para lidar com o banco de dados
 import { CarEntity } from "../entities/carEntity";
 import { ICreateCarDto } from "@modules/cars/dtos/iCreateCarDto";
-import { IListCarDto } from "@modules/cars/dtos/iListCarDto";
+import { IListCarAvailableTrueFilterDto } from "@modules/cars/dtos/iListCarAvailableTrueFilterDto";
 import { ICarRepository } from "@modules/cars/repositories/iCarRepository";
 
 class CarRepository implements ICarRepository { // cria a classe que vai ser o repositório
@@ -37,7 +37,9 @@ class CarRepository implements ICarRepository { // cria a classe que vai ser o r
   }
 
   // função que vai listar os carros disponivel com filtragem extra opcional
-  async findAvailableTrueFilter({ name, brand, categoryId }: IListCarDto): Promise<CarEntity[]> {
+  async findAvailableTrueFilter(
+    { name, brand, categoryId }: IListCarAvailableTrueFilterDto,
+  ): Promise<CarEntity[]> {
     const carQueryBuilder = await this.carRepository
       .createQueryBuilder("car") // cria uma nova tabelas com as informações
       .where("available = :available", { available: true }); // exclui as informações que não atente o requisito

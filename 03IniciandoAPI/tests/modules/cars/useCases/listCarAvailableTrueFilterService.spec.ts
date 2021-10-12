@@ -1,14 +1,14 @@
 import "reflect-metadata"; // importa a dependencia necessária para o tsyringe funcionar
 import { CarRepositoryImMemory } from "../repositories/carRepositoryInMemory";
-import { ListCarService } from "@modules/cars/useCases/listCar/listCarService";
+import { ListCarAvailableTrueFilterService } from "@modules/cars/useCases/listCarAvailableTrueFilter/listCarAvailableTrueFilterService";
 
 let carRepositoryImMemory: CarRepositoryImMemory; // cria a variavel tipada para o repositório de carro
-let listCarService: ListCarService; // cria a variavel tipada para o serviço de listagem de carros
+let listCarAvailableTrueFilterService: ListCarAvailableTrueFilterService; // cria a variavel tipada para o serviço de listagem de carros
 
 describe("Listagem de carros", () => { // cria um grupo de testes
   beforeEach(() => { // serve para executar um grupo de comando antes de todos os testes
     carRepositoryImMemory = new CarRepositoryImMemory(); // instancia para criar o acesso ao repositório de carros volatil
-    listCarService = new ListCarService(carRepositoryImMemory); // instancia para criar o acesso ao serviço de listagem de carros vinculado com o repositório de carro
+    listCarAvailableTrueFilterService = new ListCarAvailableTrueFilterService(carRepositoryImMemory); // instancia para criar o acesso ao serviço de listagem de carros vinculado com o repositório de carro
   });
 
   // O TESTE AINDA NÃO ESTÁ VERIFICANDO SE ESTÁ RETORNANDO SOMENTE OS CARROS DISPONIVEIS
@@ -24,9 +24,9 @@ describe("Listagem de carros", () => { // cria um grupo de testes
     });
 
     // chama a função de listagem de carro
-    const carAllAvailableTrue = await listCarService.execute({});
+    const carValidAll = await listCarAvailableTrueFilterService.execute({});
 
-    expect(carAllAvailableTrue).toEqual([car1]); // verifica se o resultado foi o esperado
+    expect(carValidAll).toEqual([car1]); // verifica se o resultado foi o esperado
   });
 
   it("Deve ser possivel listar todos os carros disponiveis pelo nome", async () => { // cria uma regra
@@ -51,9 +51,11 @@ describe("Listagem de carros", () => { // cria um grupo de testes
     });
 
     // chama a função de listagem de carro com a filtragem por nome
-    const carAllAvailableTrueName = await listCarService.execute({ name: "Nome teste 3" });
+    const carValidName = await listCarAvailableTrueFilterService.execute(
+      { name: "Nome teste 3" },
+    );
 
-    expect(carAllAvailableTrueName).toEqual([car3]); // verifica se o resultado foi o esperado
+    expect(carValidName).toEqual([car3]); // verifica se o resultado foi o esperado
   });
 
   it("Deve ser possivel listar todos os carros disponiveis pela marca", async () => { // cria uma regra
@@ -78,12 +80,14 @@ describe("Listagem de carros", () => { // cria um grupo de testes
     });
 
     // chama a função de listagem de carro com a filtragem pela marca
-    const carAllAvailableTrueName = await listCarService.execute({ brand: "Marca teste 5" });
+    const carValidBrand = await listCarAvailableTrueFilterService.execute(
+      { brand: "Marca teste 5" },
+    );
 
-    expect(carAllAvailableTrueName).toEqual([car5]); // verifica se o resultado foi o esperado
+    expect(carValidBrand).toEqual([car5]); // verifica se o resultado foi o esperado
   });
 
-  it("Deve ser possivel listar todos os carros disponiveis pela categoria", async () => { // cria uma regra
+  it("Deve ser possivel listar todos os carros disponiveis pelo ID da categoria", async () => { // cria uma regra
     const car7 = await carRepositoryImMemory.create({ // chama a função de cadastro de carro
       name: "Nome teste 7",
       description: "Descrição teste 7",
@@ -105,10 +109,10 @@ describe("Listagem de carros", () => { // cria um grupo de testes
     });
 
     // chama a função de listagem de carro com a filtragem pela categoria
-    const carAllAvailableTrueName = await listCarService.execute(
+    const carValidCategoryId = await listCarAvailableTrueFilterService.execute(
       { categoryId: "Categoria ID teste 7" },
     );
 
-    expect(carAllAvailableTrueName).toEqual([car7]); // verifica se o resultado foi o esperado
+    expect(carValidCategoryId).toEqual([car7]); // verifica se o resultado foi o esperado
   });
 });
