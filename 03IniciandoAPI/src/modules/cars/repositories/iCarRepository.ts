@@ -1,4 +1,5 @@
 import { ICreateCarDto } from "../dtos/iCreateCarDto";
+import { IListCarDto } from "../dtos/iListCarDto";
 import { CarEntity } from "../infra/typeorm/entities/carEntity";
 
 interface ICarRepository {
@@ -6,6 +7,7 @@ interface ICarRepository {
     { name, description, dailyRate, licensePlate, fineAmount, brand, categoryId }: ICreateCarDto
   ): Promise<CarEntity>;
   findByLicensePlate(licensePlate: string): Promise<CarEntity>;
+  findAvailableTrueFilter({ name, brand, categoryId }: IListCarDto): Promise<CarEntity[]>;
 }
 
 export { ICarRepository }; // exporta para poder ser chamado

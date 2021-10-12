@@ -1,11 +1,14 @@
 import { ICreateCarDto } from "@modules/cars/dtos/iCreateCarDto";
+import { IListCarDto } from "@modules/cars/dtos/iListCarDto";
 import { CarEntity } from "@modules/cars/infra/typeorm/entities/carEntity";
 import { ICarRepository } from "@modules/cars/repositories/iCarRepository";
 
-class CarRepositoryImMemory implements ICarRepository { // criando uma classe
+// classe que vai servir como um repositório volatil de carros
+class CarRepositoryImMemory implements ICarRepository {
   cars: CarEntity[] = [] // criando um bando de dados tipado e volatil
 
-  async create( // criando uma função
+  // função que vai criar o cadastro de um novo carro
+  async create(
     { name, description, dailyRate, licensePlate, fineAmount, brand, categoryId }: ICreateCarDto,
   ): Promise<CarEntity> {
     const car = new CarEntity(); // cria uma variável instanciada e tipada
@@ -18,10 +21,27 @@ class CarRepositoryImMemory implements ICarRepository { // criando uma classe
     return car; // retorna algo ao chamador
   }
 
-  async findByLicensePlate(licensePlate: string): Promise<CarEntity> { // criando uma função
-    const carFind = this.cars.find((car) => car.licensePlate === licensePlate); // chama a função de busca
+  // função que vai buscar um carro pela placa
+  async findByLicensePlate(licensePlate: string): Promise<CarEntity> {
+    const carFind = this.cars.find((car) => car.licensePlate === licensePlate); // chama o método de busca
 
     return carFind; // retorna algo algo chamador
+  }
+
+  // função que vai listar os carros disponivel com filtragem extra opcional
+  async findAvailableTrueFilter({ name, brand, categoryId }: IListCarDto): Promise<CarEntity[]> {
+    const carFilterAvailableTrue = this.cars.filter((car) => { // chama o método que vai realizar uma filtra nas informações
+      if (car.available === true
+        && ((name && car.name === name)
+        || (brand && car.brand === brand)
+        || (categoryId && car.categoryId === categoryId))
+      ) { // regras que definem quando retornar as informações do carro
+        return car; // retorna as informações do carro
+      }
+      return null; // retorna nenhuma informação
+    });
+
+    return carFilterAvailableTrue; // retorna algo ao chamador
   }
 }
 

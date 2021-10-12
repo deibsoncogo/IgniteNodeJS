@@ -1,0 +1,48 @@
+import "reflect-metadata"; // importa a dependencia necessária para o tsyringe funcionar
+import { CarRepositoryImMemory } from "../repositories/carRepositoryInMemory";
+import { ListCarService } from "@modules/cars/useCases/listCar/listCarService";
+
+let carRepositoryImMemory: CarRepositoryImMemory; // cria a variavel tipada para o repositório de carro
+let listCarService: ListCarService; // cria a variavel tipada para o serviço de listagem de carros
+
+describe("Listagem de carros", () => { // cria um grupo de testes
+  beforeEach(() => { // serve para executar um grupo de comando antes de todos os testes
+    carRepositoryImMemory = new CarRepositoryImMemory(); // instancia para criar o acesso ao repositório de carros volatil
+    listCarService = new ListCarService(carRepositoryImMemory); // instancia para criar o acesso ao serviço de listagem de carros vinculado com o repositório de carro
+  });
+
+  // O TESTE AINDA NÃO ESTÁ VERIFICANDO SE ESTÁ RETORNANDO SOMENTE OS CARROS DISPONIVEIS
+  it("Deve ser possivel listar todos os carros disponiveis", async () => { // cria um teste
+    const car1 = await carRepositoryImMemory.create({ // chama a função de cadastro de carro
+      name: "Nome teste 1",
+      description: "Descrição teste 1",
+      dailyRate: 11,
+      licensePlate: "PLA-1T11",
+      fineAmount: 12,
+      brand: "Marca teste 1",
+      categoryId: "Categoria ID teste 1",
+    });
+
+    // chama a função de listagem de carro
+    const carAllAvailableTrue = await listCarService.execute({});
+
+    expect(carAllAvailableTrue).toEqual([car1]); // verifica se o resultado foi o esperado
+  });
+
+  it("Deve ser possivel listar todos os carros disponiveis pelo nome", async () => { // cria uma regra
+    const car3 = await carRepositoryImMemory.create({ // chama a função de cadastro de carro
+      name: "Nome teste 3",
+      description: "Descrição teste 3",
+      dailyRate: 31,
+      licensePlate: "PLA-3T11",
+      fineAmount: 32,
+      brand: "Marca teste 3",
+      categoryId: "Categoria ID teste 3",
+    });
+
+    // chama a função de listagem de carro com a filtragem por nome
+    const carAllAvailableTrueName = await listCarService.execute({ name: "Nome teste 3" });
+
+    expect(carAllAvailableTrueName).toEqual([car3]); // verifica se o resultado foi o esperado
+  });
+});
