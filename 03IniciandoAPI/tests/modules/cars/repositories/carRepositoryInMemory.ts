@@ -32,7 +32,7 @@ class CarRepositoryImMemory implements ICarRepository {
   async findAvailableTrueFilter({ name, brand, categoryId }: IListCarDto): Promise<CarEntity[]> {
     const carFilterAvailableTrue = this.cars.filter((car) => { // chama o método que vai realizar uma filtra nas informações
       if (car.available === true
-        && ((name && car.name === name)
+        || ((name && car.name === name)
         || (brand && car.brand === brand)
         || (categoryId && car.categoryId === categoryId))
       ) { // regras que definem quando retornar as informações do carro
